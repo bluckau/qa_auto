@@ -1,9 +1,11 @@
 package com.stg.bluckau.qa;
 
-/**
- * Hello world!
- *
+/*
+ * NOTE: The qa automation stuff is in the src/test/java area and is driven by junit. 
+ * 
  */
+
+
 public class App 
 {
     public static void main( String[] args )
