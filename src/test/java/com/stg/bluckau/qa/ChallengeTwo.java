@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-public class AppTest 
+public class ChallengeTwo 
 {
 	@BeforeClass
 	public static void beforeClass()
