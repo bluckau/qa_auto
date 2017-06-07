@@ -41,21 +41,30 @@ public class TestObjects
 		driver = getDriver();
 		WebDriverWait wait = new WebDriverWait(driver, 15);
 		Actions builder = new Actions(driver);
-		//By menuLocator = By.xpath("//a[@title=\'" + menu + "\']");
 		WebElement menuElement = driver.findElement(By.xpath("//a[@title=\'" + menu + "\']"));
-		//WebElement element = driver.findElement(menuLocator);
-
+		
 		//hover
 		builder.moveToElement(menuElement).perform();
 
 		//click when clickable
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".SuperfishMegaMenu-level--1")));
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".SuperfishMegaMenu-level--1")));
 		//The above does not work sufficiently. Snoozing for now...
 		snooze(1);
 		menuElement.click();
 
 		//Wait for page title
-		wait.until(ExpectedConditions.titleContains(validationText));
+		try
+		{
+			wait.until(ExpectedConditions.titleContains(validationText));
+		}
+		catch(org.openqa.selenium.TimeoutException e)
+		{
+			System.out.println("Error: The title we are looking for did not appear");
+			System.out.println("Title expected: " + validationText);
+			System.out.println("Title seen: " + driver.getTitle());
+			return false;
+		}
+		//snooze(1);
 		System.out.println("Title is: " + driver.getTitle());
 
 		//Now run the formal check for the page title 

@@ -6,10 +6,10 @@ package com.stg.bluckau.qa;
  */
 
 
-public class App 
+public class QaApp 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    	System.out.println("Hello World");
     }
 }

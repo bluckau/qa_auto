@@ -62,8 +62,9 @@ public class ChallengeTwo
 	@Test
 	public void testNav4()
 	{
+		System.out.println("Nav4");
 		TestObjects.goToURL("http://www.skiutah.com");
-		String validationString = "Ski Utah | Utah Ski Resorts, Lift Tickets, Ski Passes, Maps & More! - Ski Utah";
+		String validationString = "Deals - All Services - Ski Utah";
 		String menuOption = "Deals";
 		assertTrue(TestObjects.verifyPage(validationString, menuOption));
 	}
