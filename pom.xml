@@ -31,5 +31,20 @@
     	<artifactId>selenium-chrome-driver</artifactId>
     	<version>2.50.0</version>
     </dependency>
+    <dependency>
+    	<groupId>org.seleniumhq.webdriver</groupId>
+    	<artifactId>webdriver-support</artifactId>
+    	<version>0.9.7376</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.seleniumhq.webdriver</groupId>
+    	<artifactId>webdriver-htmlunit</artifactId>
+    	<version>0.9.7089</version>
+    </dependency>
+    <dependency>
+    	<groupId>ru.stqa.selenium</groupId>
+    	<artifactId>webdriver-expected-conditions</artifactId>
+    	<version>1.0.52</version>
+    </dependency>
   </dependencies>
 </project>

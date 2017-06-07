@@ -1,10 +1,6 @@
 package com.stg.bluckau.qa;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 import io.github.bonigarcia.wdm.ChromeDriverManager;
-
 import static org.junit.Assert.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -13,19 +9,18 @@ import org.junit.Test;
 
 public class AppTest 
 {
-
 	@BeforeClass
 	public static void beforeClass()
 	{
 		ChromeDriverManager.getInstance().setup();
-		System.out.println("before");
+		System.out.println("	Running beforeClass");
 	}
-	
+
 	@AfterClass
 	public static void Afterclass()
 	{
-		System.out.println("after");
-		TestObjects.driver.quit();
+		System.out.println("	running afterClass");
+		//TestObjects.driver.quit();
 	}
 
 	@Test
@@ -33,10 +28,10 @@ public class AppTest
 	{
 		TestObjects.goToURL("http://www.skiutah.com");
 		String title = TestObjects.getPageTitle();
-		System.out.println("Title is " + title);
+		System.out.println("	Title is " + title);
 		assertEquals(title, "Ski Utah | Utah Ski Resorts, Lift Tickets, Ski Passes, Maps & More! - Ski Utah");
 	}
-		
+
 	@Test
 	public void testNav1()
 	{
@@ -45,7 +40,7 @@ public class AppTest
 		String menuOption = "Plan Your Trip";
 		assertTrue(TestObjects.verifyPage(validationString, menuOption));
 	}
-	
+
 	@Test
 	public void testNav2()
 	{
@@ -54,8 +49,7 @@ public class AppTest
 		String menuOption = "Resorts & Snow";
 		assertTrue(TestObjects.verifyPage(validationString, menuOption));
 	}
-	
-	
+
 	@Test
 	public void testNav3()
 	{
@@ -64,7 +58,7 @@ public class AppTest
 		String menuOption = "Stories";
 		assertTrue(TestObjects.verifyPage(validationString, menuOption));
 	}
-	
+
 	@Test
 	public void testNav4()
 	{
@@ -73,6 +67,7 @@ public class AppTest
 		String menuOption = "Deals";
 		assertTrue(TestObjects.verifyPage(validationString, menuOption));
 	}
+
 	@Test
 	public void testNav5()
 	{
@@ -81,6 +76,7 @@ public class AppTest
 		String menuOption = "Passes";
 		assertTrue(TestObjects.verifyPage(validationString, menuOption));
 	}
+
 	@Test
 	public void testNav6()
 	{
@@ -89,5 +85,4 @@ public class AppTest
 		String menuOption = "Explore";
 		assertTrue(TestObjects.verifyPage(validationString, menuOption));
 	}
-	
 }
