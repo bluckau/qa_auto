@@ -9,6 +9,8 @@ import org.junit.Test;
 
 public class ChallengeOne 
 {
+	MainPage mp = new MainPage();
+	
 	@BeforeClass
 	public static void beforeClass()
 	{
@@ -20,15 +22,15 @@ public class ChallengeOne
 	public static void Afterclass()
 	{
 		System.out.println("	running afterClass");
-		//TestObjects.driver.quit();
+		Automation.quit();
 	}
 
 	@Test
 	public void testTitle()
 	{
-		TestObjects.goToURL("http://www.skiutah.com");
-		String title = TestObjects.getPageTitle();
-		System.out.println("	Title is " + title);
-		assertEquals(title, "Ski Utah | Utah Ski Resorts, Lift Tickets, Ski Passes, Maps & More! - Ski Utah");
+		String validationText = "Ski Utah | Utah Ski Resorts, Lift Tickets, Ski Passes, Maps & More! - Ski Utah";
+		mp.pageLoad();
+		String title = Automation.getPageTitleWithWait(validationText);
+		assertEquals(title, validationText);
 	}
 }

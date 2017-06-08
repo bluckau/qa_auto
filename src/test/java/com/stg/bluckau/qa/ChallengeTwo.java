@@ -9,6 +9,8 @@ import org.junit.Test;
 
 public class ChallengeTwo 
 {
+	MainPage mp = new MainPage();
+	
 	@BeforeClass
 	public static void beforeClass()
 	{
@@ -20,27 +22,22 @@ public class ChallengeTwo
 	public static void Afterclass()
 	{
 		System.out.println("	running afterClass");
-		//TestObjects.driver.quit();
+		Automation.quit();
 	}
 
-	@Test
-	public void testTitle()
-	{
-		TestObjects.goToURL("http://www.skiutah.com");
-		String title = TestObjects.getPageTitle();
-		System.out.println("	Title is " + title);
-		assertEquals(title, "Ski Utah | Utah Ski Resorts, Lift Tickets, Ski Passes, Maps & More! - Ski Utah");
-	}
-
+		
 	@Test
 	public void testNav1()
 	{
-		TestObjects.goToURL("http://www.skiutah.com");
 		String validationString = "Ski Utah Trip Planner - Ski Utah";
 		String menuOption = "Plan Your Trip";
-		assertTrue(TestObjects.verifyPage(validationString, menuOption));
+		mp.pageLoad();
+		mp.goToMenu(menuOption);
+		String title = Automation.getPageTitleWithWait(validationString);
+		assertEquals(title, validationString);
 	}
-
+	
+	/*
 	@Test
 	public void testNav2()
 	{
@@ -86,4 +83,5 @@ public class ChallengeTwo
 		String menuOption = "Explore";
 		assertTrue(TestObjects.verifyPage(validationString, menuOption));
 	}
+	*/
 }
