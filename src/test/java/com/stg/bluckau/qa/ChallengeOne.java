@@ -23,6 +23,7 @@ public class ChallengeOne
 	{
 		System.out.println("	running afterClass");
 		Automation.quit();
+		Automation.driver = null;
 	}
 
 	@Test

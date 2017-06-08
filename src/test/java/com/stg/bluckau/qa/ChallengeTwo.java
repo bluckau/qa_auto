@@ -37,7 +37,62 @@ public class ChallengeTwo
 		assertEquals(title, validationString);
 	}
 	
+	@Test
+	public void testNav2()
+	{
+		String validationString = "Utah Snow Report | Snow Totals at Utah Ski Resorts - Ski Utah";
+		String menuOption = "Resorts & Snow";
+		mp.pageLoad();
+		mp.goToMenu(menuOption);
+		String title = Automation.getPageTitleWithWait(validationString);
+		assertEquals(title, validationString);
+	}
+	
+	@Test
+	public void testNav3()
+	{
+		String validationString = "Read About the Latest Happenings on the Slopes - Ski Utah";
+		String menuOption = "Stories";
+		mp.pageLoad();
+		mp.goToMenu(menuOption);
+		String title = Automation.getPageTitleWithWait(validationString);
+		assertEquals(title, validationString);
+	}
+	
+	@Test
+	public void testNav4()
+	{
+		String validationString = "Deals - All Services - Ski Utah";
+		String menuOption = "Deals";
+		mp.pageLoad();
+		mp.goToMenu(menuOption);
+		String title = Automation.getPageTitleWithWait(validationString);
+		assertEquals(title, validationString);
+	}
+	
+	@Test
+	public void testNav5()
+	{
+		String validationString = "2017-2018 Ski Season Passes | Utah Ski Passes | Ski Utah - Ski Utah";
+		String menuOption = "Passes";
+		mp.pageLoad();
+		mp.goToMenu(menuOption);
+		String title = Automation.getPageTitleWithWait(validationString);
+		assertEquals(title, validationString);
+	}
+	
+	@Test
+	public void testNav6()
+	{
+		String validationString = "Utah Ski Areas 101 | Utah Ski Resort Info | Ski Utah - Ski Utah";
+		String menuOption = "Explore";
+		mp.pageLoad();
+		mp.goToMenu(menuOption);
+		String title = Automation.getPageTitleWithWait(validationString);
+		assertEquals(title, validationString);
+	}
 	/*
+
 	@Test
 	public void testNav2()
 	{
@@ -79,8 +134,7 @@ public class ChallengeTwo
 	public void testNav6()
 	{
 		TestObjects.goToURL("http://www.skiutah.com");
-		String validationString = "Utah Ski Areas 101 | Utah Ski Resort Info | Ski Utah - Ski Utah";
-		String menuOption = "Explore";
+
 		assertTrue(TestObjects.verifyPage(validationString, menuOption));
 	}
 	*/
