@@ -1,16 +1,18 @@
 package com.stg.bluckau.qa;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 
-public class ChallengeOne 
+
+public class TestChallengeOne 
 {
 	MainPage mp = new MainPage();
-	
+
 	@BeforeClass
 	public static void beforeClass()
 	{
@@ -31,7 +33,7 @@ public class ChallengeOne
 	{
 		String validationText = "Ski Utah | Utah Ski Resorts, Lift Tickets, Ski Passes, Maps & More! - Ski Utah";
 		mp.pageLoad();
-		String title = Automation.getPageTitleWithWait(validationText);
+		String title = Automation.getPageTitle();
 		assertEquals(title, validationText);
 	}
 }
