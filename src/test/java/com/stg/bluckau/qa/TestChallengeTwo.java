@@ -2,31 +2,13 @@ package com.stg.bluckau.qa;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 
-
-public class TestChallengeTwo 
+public class TestChallengeTwo extends TestChallenge
 {
 	MainPage mp = new MainPage();
 	
-	@BeforeClass
-	public static void beforeClass()
-	{
-		ChromeDriverManager.getInstance().setup();
-		System.out.println("	Running beforeClass");
-	}
-
-	@AfterClass
-	public static void Afterclass()
-	{
-		System.out.println("	running afterClass");
-		//Automation.quit();
-	}
-
 		
 	@Test
 	public void testNav1()

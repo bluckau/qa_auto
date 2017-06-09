@@ -6,9 +6,6 @@ public class ChallengeOne
     public static void main( String[] args )
     {
     	MainPage mp = new MainPage();
-
-  		String validationText = "Ski Utah | Utah Ski Resorts, Lift Tickets, Ski Passes, Maps & More! - Ski Utah";
-
   		System.out.println("Loading Main page");
   		mp.pageLoad();
 
