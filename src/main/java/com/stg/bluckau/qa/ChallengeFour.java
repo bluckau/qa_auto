@@ -11,16 +11,8 @@ public class ChallengeFour
 			System.exit(1);
 		}
 		resortName = args[0];
-		// System.err.println("resort = %s", resortName);
 
 		CompareResorts compareResorts = new CompareResorts();
-		// ChromeDriverManager.getInstance().setup();
-
-		// System.out.println("Loading Main page");
-		// mainPage.pageLoad();
-
-		// System.out.println("Going to sub menu for \"Compare All Resorts\"");
-		// mainPage.goToSubMenu("Explore", "Compare All Resorts");
 		compareResorts.pageLoad();
 
 		int miles = compareResorts.getMilesForResort(resortName);
