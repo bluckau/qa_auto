@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 public class WebCrawler
 {
 	private static WebDriver driver;
@@ -34,51 +33,49 @@ public class WebCrawler
 
 	public List<String> getCurrentLinks(int limit)
 	{
-		System.out.println("LIMIT = " + limit);
+		System.out.println("GCL: LIMIT = " + limit);
 
 		List<String> currentLinks = new ArrayList<String>();
 
 		List<WebElement> urlsList = driver.findElements(By.tagName("a"));
-		System.out.println("Size is: " + urlsList.size());
+		System.out.println("Size of list is: " + urlsList.size());
 		int count = 0;
-		for (WebElement e : urlsList)
+		for (WebElement webElement : urlsList)
 		{
 			if (limit > 0 && count == limit)
 			{
-				// TODO: Take this out or make it configurable
-				System.out.println("QUIITING AFTER FINDING " + limit);
-				System.out.println("Going to return a list of: " + currentLinks.size() + "links");
+				// TODO: Take limit out or make it configurable
 				return currentLinks;
 			}
 
-			String linkText = e.getAttribute("href");
-			System.out.println("Link Text: " + linkText);
+			String linkText = webElement.getAttribute("href");
+			System.err.println("GCL: Link Text: " + linkText);
 			currentLinks.add(linkText);
 			count++;
 		}
-		System.out.println("Going to return a list of: " + currentLinks.size() + "links");
+
 		return currentLinks;
 	}
 
 	private boolean linkWorks(String url)
 	{
-		HttpURLConnection theConnection;
-		System.err.println("Checking link: " + url);
-
+		System.err.println("LW: Checking link: " + url);
+		int responseCode = 0;
 		try
 		{
-			theConnection = (HttpURLConnection) new URL(url).openConnection();
-			return theConnection.getResponseCode() == 200;
+			HttpURLConnection theConnection = (HttpURLConnection) new URL(url).openConnection();
+			responseCode = theConnection.getResponseCode();
+			System.err.println("LW: the response code is: " + responseCode);
+			return responseCode == 200;
 		} catch (MalformedURLException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Error: The url was malformed");
 			return false;
 		} catch (IOException e)
 		{
+			e.printStackTrace();
 			return false;
 		}
-
 	}
 
 	public void printBrokenLinks()
@@ -91,62 +88,39 @@ public class WebCrawler
 		}
 	}
 
-	// public void recursivelyWalk()
-	// {
-	// System.out.println("running recursively walk without limit");
-	// recursivelyWalk(URL, 0);
-	// }
-
 	public void recursivelyWalk(String sURL, int limit)
 	{
-		System.out.println("Running the basic recursively walk function against URL: " + sURL);
-
-		System.out.println("*********  Going to GET: " + sURL);
 		driver.get(sURL);
 		visitedLinks.add(sURL);
+
 		level++;
 		System.out.println("                                                 currentLevel = " + level);
-		System.out.println("getting current links");
+		System.err.println("RC: getting current links");
 		List<String> links = getCurrentLinks(limit);
-		System.out.println("Done getting current links");
-		System.out.println("Strings to process for next recusion: " + links.size());
-		Boolean prefixFound;
+
+		Boolean prefixFound = false;
 		for (String thisLink : links)
 		{
-			System.out.println("PROCESSING LINK");
 			prefixFound = false;
-			System.out.println("Checking for prefixes for " + sURL);
-			for (String p : prefixes)
+			//Check for the prefix to start with the right thing
+			for (String prefix : prefixes)
 			{
-				// System.out.println("s is: " + s);
-				// System.out.println("p is: " + p);
-				if (sURL.startsWith(p))
-				{
-					System.out.println("match found");
+				if (sURL.startsWith(prefix))
 					prefixFound = true;
-				}
 			}
 
 			if (prefixFound == false)
-			{
 				System.out.println("Web site is outside of range");
-			}
 			else if (visitedLinks.contains(thisLink))
-			{
 				System.out.println("already visited.");
-			}
 			else if (brokenLinks.contains(thisLink))
-			{
 				System.out.println("link was marked broken");
-			}
-
 			else if (linkWorks(thisLink))
-			{
-				System.out.println("Going to call the next recursivelyWalk with" + thisLink);
 				recursivelyWalk(thisLink, limit);
-			}
-		}
-		level--;
-	}
 
-}
+		}//end outer for loop
+
+		level--;
+		System.out.println("                                                 currentLevel = " + level);
+	} // end recursivelyWalk
+}// end class webCrawler
