@@ -16,7 +16,7 @@ public class ChallengeSix
 		prefixes.add("https://www.skiutah.com");
 
 		WebCrawler webCrawler = new WebCrawler("https://skiutah.com", prefixes);
-		webCrawler.recursivelyWalk("https://skiutah.com", 0);
+		webCrawler.recursivelyWalk("https://skiutah.com", 0, 0);
 		webCrawler.printBrokenLinks();
 	}
 }
