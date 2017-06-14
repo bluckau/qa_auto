@@ -7,39 +7,28 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 
 
 public class TestChallengeOne
 {
 	private static int testNumber;
-	private static WebDriver driver;
-	private static WebDriverWait wait;
 	private static MainPage mainPage;
 
 	@Before
 	public void before()
 	{
-		System.err.println("	Running Test " + testNumber);
-		testNumber++;
+		System.err.println("	Running Test " + testNumber++);
 	}
 
 	@After
 	public void after()
 	{
 		System.err.println("	Finished Running Test " + testNumber);
-		testNumber++;
 	}
 
 	@BeforeClass
 	public static void beforeClass()
 	{
-		driver = Automation.getDriver();
-		wait = Automation.getWait();
-		ChromeDriverManager.getInstance().setup();
 		mainPage = new MainPage();
 	}
 

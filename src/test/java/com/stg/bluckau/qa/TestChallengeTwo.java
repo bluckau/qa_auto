@@ -7,36 +7,28 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class TestChallengeTwo
 {
 	private static int testNumber;
-	private static WebDriver driver;
-	private static WebDriverWait wait;
 	private static MainPage mainPage;
 
 	@Before
 	public void before()
 	{
-		System.err.println("	Running Test " + testNumber);
-		testNumber++;
+		System.err.println("	Running Test " + testNumber++);
 	}
 
 	@After
 	public void after()
 	{
 		System.err.println("	Finished Running Test " + testNumber);
-		testNumber++;
 	}
 
 	@BeforeClass
 	public static void beforeClass()
 	{
-		driver = Automation.getDriver();
-		wait = Automation.getWait();
 		mainPage = new MainPage();
 	}
 
@@ -46,7 +38,7 @@ public class TestChallengeTwo
 		Automation.quit();
 		Automation.driver = null;
 	}
-		
+
 	@Test
 	public void testNav1()
 	{
@@ -59,7 +51,7 @@ public class TestChallengeTwo
 		String title = Automation.getPageTitle();
 		assertEquals(title, validationString);
 	}
-	
+
 	@Test
 	public void testNav2()
 	{
@@ -70,7 +62,7 @@ public class TestChallengeTwo
 		String title = Automation.getPageTitle();
 		assertEquals(title, validationString);
 	}
-	
+
 	@Test
 	public void testNav3()
 	{
@@ -81,18 +73,18 @@ public class TestChallengeTwo
 		String title = Automation.getPageTitle();
 		assertEquals(title, validationString);
 	}
-	
+
 	@Test
 	public void testNav4()
 	{
-		String validationString = "Deals - All Services - Ski Utah";
+		String validationString = "Utah Ski Trip Discounts | Utah Ski Packages - Ski Utah";
 		String menuOption = "Deals";
 		mainPage.pageLoad();
 		mainPage.goToMenu(menuOption);
 		String title = Automation.getPageTitle();
 		assertEquals(title, validationString);
 	}
-	
+
 	@Test
 	public void testNav5()
 	{
@@ -103,7 +95,7 @@ public class TestChallengeTwo
 		String title = Automation.getPageTitle();
 		assertEquals(title, validationString);
 	}
-	
+
 	@Test
 	public void testNav6()
 	{

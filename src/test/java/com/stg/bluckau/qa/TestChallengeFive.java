@@ -13,37 +13,29 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 
 public class TestChallengeFive
 {
 	private static WebDriver driver;
-	private static WebDriverWait wait;
-	private static SearchPage searchPage = new SearchPage();
+	private static SearchPage searchPage;
 	private static int testNumber = 0;
 
 	@Before
-	public static void before()
+	public void before()
 	{
-		System.err.println("	Running Test " + testNumber);
-		testNumber++;
+		System.err.println("	Running Test " + testNumber++);
 	}
 
 	@After
-	public static void after()
+	public void after()
 	{
 		System.err.println("	Finished Running Test " + testNumber);
-		testNumber++;
 	}
 
 	@BeforeClass
 	public static void beforeClass()
 	{
-		driver = Automation.getDriver();
-		wait = Automation.getWait();
-		ChromeDriverManager.getInstance().setup();
+		searchPage = new SearchPage();
 	}
 
 	@AfterClass
@@ -133,7 +125,7 @@ public class TestChallengeFive
 		/*
 		 * Search all combinations. Not validating the output, but making sure
 		 * they all complete without exception (for now at least)
-		 * 
+		 *
 		 */
 		System.out.println("Testing testSearch2");
 		searchPage.pageLoad();
@@ -142,12 +134,14 @@ public class TestChallengeFive
 		List<String> subCategories = getSubCategories();
 
 		// Test every combination to make sure it does not error out
-
+		// TODO: need to take into account the mapping between category and
+		// subcategory
 		for (String resort : resorts)
 		{
-			for (String category : subCategories)
+			for (String category : categories)
 			{
-				searchPage.searchForCombination(category, subCategory, resort);
+				for (String subCategory : subCategories)
+					searchPage.searchForCombination(category, subCategory, resort);
 
 				List<String> results = new ArrayList<String>();
 				results = searchPage.getSearchResults();

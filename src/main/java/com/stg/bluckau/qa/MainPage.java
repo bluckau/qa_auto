@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MainPage 
+public class MainPage
 {
 	private static final String URL = "https://skiutah.com";
 	private static WebDriver driver;
@@ -21,7 +21,7 @@ public class MainPage
 
 	public void pageLoad()
 	{
-		driver = Automation.getDriver();
+		driver.get(URL);
 	}
 
 	public void goToMenu(String menu)

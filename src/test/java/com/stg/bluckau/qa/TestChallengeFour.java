@@ -9,48 +9,40 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class TestChallengeFour
 {
 
 	private static int testNumber;
-	private static WebDriver driver;
-	private static WebDriverWait wait;
-	private static MainPage mainPage;
+	private static CompareResorts resortsCompare;
 
 	@Before
 	public void before()
 	{
-		System.err.println("	Running Test " + testNumber);
-		testNumber++;
+		System.err.println("	Running Test " + testNumber++);
 	}
 
 	@After
 	public void after()
 	{
 		System.err.println("	Finished Running Test " + testNumber);
-		testNumber++;
 	}
 
 	@BeforeClass
 	public static void beforeClass()
 	{
-		driver = Automation.getDriver();
-		wait = Automation.getWait();
-		mainPage = new MainPage();
+		resortsCompare = new CompareResorts();
 	}
 
 	@Test
 	public void testNav1()
 	{
 		System.out.println("Testing testNav1");
-		CompareResorts resortsCompare = new CompareResorts();
+
 
 		resortsCompare.pageLoad();
-		final Map<String,Integer> dMap = new HashMap<String,Integer>();	
+		final Map<String,Integer> dMap = new HashMap<String,Integer>();
 		{
 			dMap.put("Beaver Mountain", 114);
 			dMap.put("Alta", 32);
