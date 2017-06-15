@@ -145,6 +145,7 @@ public class TestChallengeFive
 
 				List<String> results = new ArrayList<String>();
 				results = searchPage.getSearchResults();
+
 			}
 		}
 	}
