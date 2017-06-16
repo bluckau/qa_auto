@@ -17,13 +17,13 @@ public class TestChallengeTwo
 	@Before
 	public void before()
 	{
-		System.err.println("	Running Test " + testNumber++);
+		System.err.println("Running Test " + ++testNumber);
 	}
 
 	@After
 	public void after()
 	{
-		System.err.println("	Finished Running Test " + testNumber);
+		System.err.println("Finished Running Test " + testNumber);
 	}
 
 	@BeforeClass
@@ -42,7 +42,6 @@ public class TestChallengeTwo
 	@Test
 	public void testNav1()
 	{
-		System.out.println("nav1");
 		String validationString = "Ski Utah Trip Planner - Ski Utah";
 		String menuOption = "Plan Your Trip";
 		mainPage.pageLoad();

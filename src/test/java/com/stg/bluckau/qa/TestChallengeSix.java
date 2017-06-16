@@ -21,14 +21,14 @@ public class TestChallengeSix
 	@Before
 	public void before()
 	{
-		System.err.println("	Running Test " + testNumber++);
+		System.err.println("Running Test " + ++testNumber);
 		mainPage.pageLoad();
 	}
 
 	@After
 	public void after()
 	{
-		System.err.println("	Finished Running Test " + testNumber);
+		System.err.println("Finished Running Test " + testNumber);
 	}
 
 	@BeforeClass

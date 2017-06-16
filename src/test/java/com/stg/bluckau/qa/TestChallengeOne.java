@@ -17,13 +17,13 @@ public class TestChallengeOne
 	@Before
 	public void before()
 	{
-		System.err.println("	Running Test " + testNumber++);
+		System.err.println("Running Test " + ++testNumber);
 	}
 
 	@After
 	public void after()
 	{
-		System.err.println("	Finished Running Test " + testNumber);
+		System.err.println("Finished Running Test " + testNumber);
 	}
 
 	@BeforeClass

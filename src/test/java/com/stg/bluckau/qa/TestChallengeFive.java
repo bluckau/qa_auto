@@ -19,23 +19,26 @@ public class TestChallengeFive
 	private static WebDriver driver;
 	private static SearchPage searchPage;
 	private static int testNumber = 0;
+	By resortsList = By.cssSelector("div.ListingFilter-column.ListingFilter-column--categories");
 
 	@Before
 	public void before()
 	{
-		System.err.println("	Running Test " + testNumber++);
+		System.err.println("Running Test " + ++testNumber);
 	}
 
 	@After
 	public void after()
 	{
-		System.err.println("	Finished Running Test " + testNumber);
+		System.err.println("Finished Running Test " + testNumber);
 	}
 
 	@BeforeClass
 	public static void beforeClass()
 	{
+		driver = Automation.getDriver();
 		searchPage = new SearchPage();
+		searchPage.pageLoad();
 	}
 
 	@AfterClass
@@ -49,8 +52,6 @@ public class TestChallengeFive
 	{
 
 		List<String> resorts = new ArrayList<String>();
-
-		By resortsList = By.cssSelector("div.ListingFilter-column.ListingFilter-column--categories");
 		WebElement resortsListTop = driver.findElement(resortsList);
 
 		// Find subelements that are resorts
@@ -59,7 +60,7 @@ public class TestChallengeFive
 		for (WebElement row : resortElements)
 		{
 			// System.out.println("iterate");
-			System.out.println("Adding" + row.getAttribute("innerHTML"));
+			// System.out.println("Adding" + row.getAttribute("innerHTML"));
 			resorts.add(row.getAttribute("innerHTML"));
 		}
 		return resorts;
@@ -75,8 +76,7 @@ public class TestChallengeFive
 		List<WebElement> resortElements = resortsListTop.findElements(By.xpath("//./div/select/*"));
 		for (WebElement row : resortElements)
 		{
-			// System.out.println("iterate");
-			System.out.println("Adding" + row.getAttribute("innerHTML"));
+			// System.out.println("Adding " + row.getAttribute("innerHTML"));
 			cats.add(row.getAttribute("innerHTML"));
 		}
 		return cats;
@@ -92,8 +92,7 @@ public class TestChallengeFive
 		List<WebElement> resortElements = resortsListTop.findElements(By.xpath("//./div/select/*"));
 		for (WebElement row : resortElements)
 		{
-			// System.out.println("iterate");
-			System.out.println("Adding" + row.getAttribute("innerHTML"));
+			// System.out.println("Adding" + row.getAttribute("innerHTML"));
 			cats.add(row.getAttribute("innerHTML"));
 		}
 		return cats;
@@ -107,8 +106,7 @@ public class TestChallengeFive
 		 * comparison out because these result sets change constantly. You would
 		 * have to be fed a dynamic list of desired output values.
 		 */
-		System.out.println("Testing testSearch1");
-		searchPage.pageLoad();
+
 		searchPage.searchForCombination("Transportation", "Taxi", "Alta");
 
 		List<String> results = new ArrayList<String>();
@@ -127,8 +125,7 @@ public class TestChallengeFive
 		 * they all complete without exception (for now at least)
 		 *
 		 */
-		System.out.println("Testing testSearch2");
-		searchPage.pageLoad();
+
 		List<String> resorts = getResorts();
 		List<String> categories = getCategories();
 		List<String> subCategories = getSubCategories();
@@ -141,10 +138,11 @@ public class TestChallengeFive
 			for (String category : categories)
 			{
 				for (String subCategory : subCategories)
+				{
+					System.err.printf("Testing %s + %s + %s", category, subCategory, resort);
 					searchPage.searchForCombination(category, subCategory, resort);
-
-				List<String> results = new ArrayList<String>();
-				results = searchPage.getSearchResults();
+				}
+				searchPage.getSearchResults();
 
 			}
 		}
