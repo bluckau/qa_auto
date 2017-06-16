@@ -9,14 +9,10 @@ public class ChallengeSix
 	{
 		List<String> prefixes = new ArrayList<String>();
 
-		// TODO: use regex
-		prefixes.add("http://skiutah.com");
-		prefixes.add("https://skiutah.com");
-		prefixes.add("http://www.skiutah.com");
-		prefixes.add("https://www.skiutah.com");
+		String localSitePattern = "(http(s)?://)?(www)?skiutah.com/.*";
 
-		WebCrawler webCrawler = new WebCrawler("https://skiutah.com", prefixes);
-		webCrawler.recursivelyWalk("https://skiutah.com", 0, 0);
+		WebCrawler webCrawler = new WebCrawler("https://skiutah.com", localSitePattern);
+		webCrawler.recursivelyWalk("https://skiutah.com");
 		webCrawler.printBrokenLinks();
 	}
 }

@@ -3,9 +3,6 @@ package com.stg.bluckau.qa;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,7 +21,7 @@ public class TestChallengeEight
 	@Before
 	public void before()
 	{
-		System.err.println("	Running Test " + testNumber++);
+		System.err.println("Running Test " + ++testNumber);
 		mainPage.pageLoad();
 
 	}
@@ -32,7 +29,7 @@ public class TestChallengeEight
 	@After
 	public void after()
 	{
-		System.err.println("	Finished Running Test " + testNumber);
+		System.err.println("Finished Running Test " + testNumber);
 	}
 
 	@BeforeClass
@@ -40,13 +37,9 @@ public class TestChallengeEight
 	{
 		mainPage = new MainPage();
 
-		List<String> prefixes = new ArrayList<String>();
-		prefixes.add("http://skiutah.com");
-		prefixes.add("https://skiutah.com");
-		prefixes.add("http://www.skiutah.com");
-		prefixes.add("https://www.skiutah.com");
+		String localSitePattern = "(http(s)?://)?(www)?skiutah.com/.*";
 		driver = Automation.getDriver();
-		webCrawler = new WebCrawler("https://skiutah.com", prefixes);
+		webCrawler = new WebCrawler("https://skiutah.com", localSitePattern);
 	}
 
 	@AfterClass

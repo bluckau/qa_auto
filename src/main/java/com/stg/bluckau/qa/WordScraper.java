@@ -58,6 +58,7 @@ public class WordScraper
 		System.out.println("Writing file of dictionary words to: " + fileName);
 		try
 		{
+			System.out.println("Writing file " + fileName);
 			OutputStream output = new FileOutputStream(fileName);
 			Properties props = new Properties();
 
