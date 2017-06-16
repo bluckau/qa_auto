@@ -1,13 +1,9 @@
 package com.stg.bluckau.qa;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ChallengeSeven
 {
 	public static void main( String[] args )
 	{
-		List<String> prefixes = new ArrayList<String>();
 
 		String localSitePattern = "(http(s)?://)?(www)?skiutah.com/.*";
 
@@ -15,7 +11,7 @@ public class ChallengeSeven
 
 		// webCrawler.recursivelyWalk("https://skiutah.com", 5, 5);
 		webCrawler.recursivelyWalk("https://skiutah.com");
-		webCrawler.printBrokenLinks();
+
 		Automation.quit();
 	}
 }

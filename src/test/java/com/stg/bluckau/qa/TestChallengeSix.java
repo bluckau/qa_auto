@@ -36,7 +36,7 @@ public class TestChallengeSix
 		mainPage = new MainPage();
 
 		String localSitePattern = "(http(s)?://)?(www)?skiutah.com/.*";
-		webCrawler = new WebCrawler("https://skiutah.com", localSitePattern, "c:\\tmp\\filename.txt");
+		webCrawler = new WebCrawler(localSitePattern, "c:\\tmp\\filename.txt");
 	}
 
 	@AfterClass

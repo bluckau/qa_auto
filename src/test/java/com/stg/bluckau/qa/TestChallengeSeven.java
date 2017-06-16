@@ -50,7 +50,7 @@ public class TestChallengeSeven
 	@Test
 	public void testDictionary()
 	{
-		webCrawler.recursivelyWalk("https://www.skiutah.com", 3, 3, DICT);
+		webCrawler.recursivelyWalk("https://www.skiutah.com", 0, 0, DICT);
 		File dictFile = new File(DICT);
 		assertTrue(dictFile.exists());
 	}

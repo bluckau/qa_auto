@@ -44,7 +44,7 @@ public class TestChallengeFour
 	}
 
 	@Test
-	public void testNav1()
+	public void testMiles()
 	{
 		resortsCompare.pageLoad();
 		final Map<String,Integer> dMap = new HashMap<String,Integer>();
