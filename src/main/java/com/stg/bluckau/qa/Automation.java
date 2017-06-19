@@ -23,7 +23,7 @@ public class Automation {
 		}
 		return driver;
 	}
-	
+
 	public static WebDriverWait getWait()
 	{
 		return wait;
@@ -38,14 +38,15 @@ public class Automation {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static String getPageTitle()
 	{
 		return driver.getTitle();
 	}
-	
+
 	public static void quit()
 	{
 		driver.quit();
 	}
+
 }
