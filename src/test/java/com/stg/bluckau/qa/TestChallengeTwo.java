@@ -39,71 +39,15 @@ public class TestChallengeTwo
 		Automation.driver = null;
 	}
 
-	@Test
-	public void testNav1()
+	@Test(dataProvider = "webData", dataProviderClass = TestHelpers.class)
+	public void testNav1(String menuOption, String validationString)
 	{
-		String validationString = "Ski Utah Trip Planner - Ski Utah";
-		String menuOption = "Plan Your Trip";
+		System.err.println("Testing menu: " + menuOption);
+		System.err.println("ValidationString: " + validationString);
 		mainPage.pageLoad();
 		mainPage.goToMenu(menuOption, true);
 
 		String title = Automation.getPageTitle();
 		assertEquals(title, validationString);
 	}
-
-	@Test
-	public void testNav2()
-	{
-		String validationString = "Utah Snow Report | Snow Totals at Utah Ski Resorts - Ski Utah";
-		String menuOption = "Resorts & Snow";
-		mainPage.pageLoad();
-		mainPage.goToMenu(menuOption);
-		String title = Automation.getPageTitle();
-		assertEquals(title, validationString);
-	}
-
-	@Test
-	public void testNav3()
-	{
-		String validationString = "Read About the Latest Happenings on the Slopes - Ski Utah";
-		String menuOption = "Stories";
-		mainPage.pageLoad();
-		mainPage.goToMenu(menuOption, false);
-		String title = Automation.getPageTitle();
-		assertEquals(title, validationString);
-	}
-
-	@Test
-	public void testNav4()
-	{
-		String validationString = "Utah Ski Trip Discounts | Utah Ski Packages - Ski Utah";
-		String menuOption = "Deals";
-		mainPage.pageLoad();
-		mainPage.goToMenu(menuOption);
-		String title = Automation.getPageTitle();
-		assertEquals(title, validationString);
-	}
-
-	@Test
-	public void testNav5()
-	{
-		String validationString = "2017-2018 Ski Season Passes | Utah Ski Passes | Ski Utah - Ski Utah";
-		String menuOption = "Passes";
-		mainPage.pageLoad();
-		mainPage.goToMenu(menuOption);
-		String title = Automation.getPageTitle();
-		assertEquals(title, validationString);
-	}
-
-	@Test
-	public void testNav6()
-	{
-		String validationString = "Utah Ski Areas 101 | Utah Ski Resort Info | Ski Utah - Ski Utah";
-		String menuOption = "Explore";
-		mainPage.pageLoad();
-		mainPage.goToMenu(menuOption);
-		String title = Automation.getPageTitle();
-		assertEquals(title, validationString);
-	}
-
 }
