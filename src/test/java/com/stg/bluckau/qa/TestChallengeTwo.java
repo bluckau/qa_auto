@@ -1,12 +1,12 @@
 package com.stg.bluckau.qa;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 
 public class TestChallengeTwo
@@ -14,13 +14,13 @@ public class TestChallengeTwo
 	private static int testNumber;
 	private static MainPage mainPage;
 
-	@Before
+	@BeforeTest
 	public void before()
 	{
 		System.err.println("Running Test " + ++testNumber);
 	}
 
-	@After
+	@AfterTest
 	public void after()
 	{
 		System.err.println("Finished Running Test " + testNumber);

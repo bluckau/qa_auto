@@ -1,32 +1,29 @@
 package com.stg.bluckau.qa;
 
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 import java.io.File;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class TestChallengeSeven
 {
 	private static int testNumber = 0;
 	private static MainPage mainPage;
 	private static WebCrawler webCrawler;
-	private final String DICT = "c:\\tmp\\dictionary.txt";
+	private final static String DICT = "c:\\tmp\\dictionary.txt";
 
-	@Before
+	@BeforeTest
 	public void before()
 	{
 		System.err.println("Running Test " + ++testNumber);
-		mainPage.pageLoad();
-		File dictFile = new File(DICT);
-		dictFile.delete();
 	}
 
-	@After
+	@AfterTest
 	public void after()
 	{
 		System.err.println("Finished Running Test " + testNumber);
@@ -36,8 +33,11 @@ public class TestChallengeSeven
 	public static void beforeClass()
 	{
 		mainPage = new MainPage();
+		mainPage.pageLoad();
+		File dictFile = new File(DICT);
+		dictFile.delete();
 		String localSitePattern = "(http(s)?://)?(www)?skiutah.com/.*";
-		webCrawler = new WebCrawler("https://skiutah.com", localSitePattern);
+		webCrawler = new WebCrawler("https://skiutah.com", localSitePattern, DICT);
 	}
 
 	@AfterClass

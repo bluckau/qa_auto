@@ -1,21 +1,20 @@
 package com.stg.bluckau.qa;
 
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
+//Junit artifact
 //Want to run them in order most times that I'm doing it manually. Then it does the quick ones first
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 public class TestChallengeEight
 {
 	private static int testNumber = 0;
@@ -24,15 +23,13 @@ public class TestChallengeEight
 	private static WebDriver driver;
 
 
-	@Before
+	@BeforeTest
 	public void before()
 	{
 		System.err.println("Running Test " + ++testNumber);
-		mainPage.pageLoad();
-
 	}
 
-	@After
+	@AfterTest
 	public void after()
 	{
 		System.err.println("Finished Running Test " + testNumber);
@@ -42,7 +39,7 @@ public class TestChallengeEight
 	public static void beforeClass()
 	{
 		mainPage = new MainPage();
-
+		mainPage.pageLoad();
 		String localSitePattern = "(http(s)?://)?(www)?skiutah.com/.*";
 		driver = Automation.getDriver();
 		webCrawler = new WebCrawler("https://skiutah.com", localSitePattern);

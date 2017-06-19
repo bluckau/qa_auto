@@ -1,18 +1,18 @@
 package com.stg.bluckau.qa;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class TestChallengeFive
 {
@@ -21,13 +21,13 @@ public class TestChallengeFive
 	private static int testNumber = 0;
 	By resortsList = By.cssSelector("div.ListingFilter-column.ListingFilter-column--categories");
 
-	@Before
+	@BeforeTest
 	public void before()
 	{
 		System.err.println("Running Test " + ++testNumber);
 	}
 
-	@After
+	@AfterTest
 	public void after()
 	{
 		System.err.println("Finished Running Test " + testNumber);

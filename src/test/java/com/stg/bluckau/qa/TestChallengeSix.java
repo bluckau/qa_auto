@@ -1,30 +1,31 @@
 package com.stg.bluckau.qa;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 public class TestChallengeSix
 {
 	private static int testNumber = 0;
 	private static MainPage mainPage;
 	private static WebCrawler webCrawler;
-	@Before
+
+	@BeforeTest
 	public void before()
 	{
 		System.err.println("Running Test " + ++testNumber);
-		mainPage.pageLoad();
 	}
 
-	@After
+	@AfterTest
 	public void after()
 	{
 		System.err.println("Finished Running Test " + testNumber);
@@ -34,7 +35,7 @@ public class TestChallengeSix
 	public static void beforeClass()
 	{
 		mainPage = new MainPage();
-
+		mainPage.pageLoad();
 		String localSitePattern = "(http(s)?://)?(www)?skiutah.com/.*";
 		webCrawler = new WebCrawler("https://www.skiutah.com", localSitePattern, "c:\\tmp\\filename.txt");
 	}
@@ -64,7 +65,7 @@ public class TestChallengeSix
 	public void testGetLinksWithOutLimit()
 	{
 		List<String> links = webCrawler.getCurrentLinks(0);
-		assertEquals(links.size(), 5);
+		assertTrue(links.size() > 10);
 	}
 
 	@Test
