@@ -5,10 +5,9 @@ public class ChallengeEight
 	public static void main( String[] args )
 	{
 		String localSitePattern = "(http(s)?://)?(www)?skiutah.com/.*";
-		WebCrawler webCrawler = new WebCrawler(localSitePattern);
+		WebCrawler webCrawler = new WebCrawler("https://skiutah.com", localSitePattern);
 
-		webCrawler.recursivelyWalk("https://skiutah.com");
-		// webCrawler.recursivelyWalk("https://skiutah.com");
+		webCrawler.walkSite();
 
 		Automation.quit();
 	}

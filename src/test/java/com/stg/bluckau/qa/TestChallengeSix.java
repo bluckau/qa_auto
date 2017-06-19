@@ -36,7 +36,7 @@ public class TestChallengeSix
 		mainPage = new MainPage();
 
 		String localSitePattern = "(http(s)?://)?(www)?skiutah.com/.*";
-		webCrawler = new WebCrawler(localSitePattern, "c:\\tmp\\filename.txt");
+		webCrawler = new WebCrawler("https://www.skiutah.com", localSitePattern, "c:\\tmp\\filename.txt");
 	}
 
 	@AfterClass
@@ -57,6 +57,13 @@ public class TestChallengeSix
 	public void testGetLinksWithLimit()
 	{
 		List<String> links = webCrawler.getCurrentLinks(5);
+		assertEquals(links.size(), 5);
+	}
+
+	@Test
+	public void testGetLinksWithOutLimit()
+	{
+		List<String> links = webCrawler.getCurrentLinks(0);
 		assertEquals(links.size(), 5);
 	}
 
@@ -83,18 +90,14 @@ public class TestChallengeSix
 	@Test
 	public void testCrawl1()
 	{
-		webCrawler.recursivelyWalk("http://www.skiutah.com", 3, 3);
+		webCrawler.setLinksLimit(2);
+		webCrawler.walkSite();
 	}
 
 	@Test
 	public void testCrawl2()
 	{
-		webCrawler.recursivelyWalk("http://www.skiutah.com", 3, 0);
-	}
-
-	@Test
-	public void testCrawl3()
-	{
-		webCrawler.recursivelyWalk("http://www.skiutah.com");
+		webCrawler.setLinksLimit(0);
+		webCrawler.walkSite();
 	}
 }

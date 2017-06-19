@@ -10,7 +10,7 @@ public class ChallengeSeven
 		WebCrawler webCrawler = new WebCrawler("https://skiutah.com", localSitePattern);
 
 		// webCrawler.recursivelyWalk("https://skiutah.com", 5, 5);
-		webCrawler.recursivelyWalk("https://skiutah.com");
+		webCrawler.walkSite();
 
 		Automation.quit();
 	}

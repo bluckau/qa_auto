@@ -80,8 +80,9 @@ public class TestChallengeEight
 	@Test
 	public void testCustomWebCrawler()
 	{
-		WebCrawler webCrawler2 = new WebCrawler("(http(s)?://)?(www)?the-internet.herokuapp.com/broken_images");
-		webCrawler2.recursivelyWalk("http://the-internet.herokuapp.com/broken_images");
+		WebCrawler webCrawler2 = new WebCrawler("http://the-internet.herokuapp.com/broken_images",
+				"(http(s)?://)?(www)?the-internet.herokuapp.com/broken_images");
+		webCrawler2.walkSite();
 	}
 }
 

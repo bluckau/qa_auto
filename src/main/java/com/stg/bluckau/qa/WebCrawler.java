@@ -47,6 +47,7 @@ public class WebCrawler
 
 	WebCrawler(String url, String sitePattern, String fileName)
 	{
+		startingUrl = url;
 		this.sitePattern = sitePattern;
 		driver = Automation.getDriver();
 		brokenLinks = new HashSet<String>();

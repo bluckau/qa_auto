@@ -15,7 +15,7 @@ public class TestChallengeSeven
 	private static int testNumber = 0;
 	private static MainPage mainPage;
 	private static WebCrawler webCrawler;
-	private final String DICT = "dictionary.txt";
+	private final String DICT = "c:\\tmp\\dictionary.txt";
 
 	@Before
 	public void before()
@@ -50,7 +50,10 @@ public class TestChallengeSeven
 	@Test
 	public void testDictionary()
 	{
-		webCrawler.recursivelyWalk("https://www.skiutah.com", 0, 0, DICT);
+		// Speed up this test
+		webCrawler.setLinksLimit(2);
+
+		webCrawler.walkSite();
 		File dictFile = new File(DICT);
 		assertTrue(dictFile.exists());
 	}
