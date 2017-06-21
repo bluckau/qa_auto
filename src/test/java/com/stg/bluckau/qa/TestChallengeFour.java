@@ -9,14 +9,22 @@ import org.junit.After;
 import org.junit.Before;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
+import static com.stg.bluckau.qa.TestHelpers.getWebData;
 
 public class TestChallengeFour
 {
 
 	private static int testNumber;
 	private static CompareResorts resortsCompare;
+
+	@DataProvider(name = "webData")
+	public static Object[][] webData(String fileName)
+	{
+		Object[][] arrayObject = TestHelpers.getWebData(fileName);
+		return arrayObject;
+	}
 
 	@Before
 	public void before()
