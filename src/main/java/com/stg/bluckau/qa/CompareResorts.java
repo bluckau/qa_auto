@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class CompareResorts 
+public class CompareResorts
 {
 	private static final By dropDown = By.cssSelector(".js-resort-comparison-select");
 	private static final String URL = "https://www.skiutah.com/resorts/compare-resorts";
@@ -26,7 +26,7 @@ public class CompareResorts
 		driver.get(URL);
 	}
 
-	public int getMilesForResort(String resortName)
+	public String getMilesForResort(String resortName)
 	{
 		WebElement dropDownElement = driver.findElement(dropDown);
 		Select select = new Select(dropDownElement);
@@ -39,7 +39,7 @@ public class CompareResorts
 				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(comparisonValue.toString())))
 				.getText()).trim();
 
-		return Integer.parseInt(value);
+		return value;
 
 	}
 }

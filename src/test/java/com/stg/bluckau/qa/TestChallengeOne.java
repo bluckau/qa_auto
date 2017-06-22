@@ -22,7 +22,7 @@ public class TestChallengeOne
 	public static Object[][] webData()
 	{
 		System.out.println("**** get web data ****");
-		Object[][] arrayObject = TestHelpers.getWebData(dataFileName);
+		Object[][] arrayObject = TestHelpers.getWebData(dataFileName, 2);
 		return arrayObject;
 	}
 

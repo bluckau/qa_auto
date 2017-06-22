@@ -5,34 +5,39 @@ import static org.junit.Assert.assertEquals;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import static com.stg.bluckau.qa.TestHelpers.getWebData;
 
 public class TestChallengeFour
 {
-
 	private static int testNumber;
 	private static CompareResorts resortsCompare;
+	private static String dataFileName;
 
 	@DataProvider(name = "webData")
-	public static Object[][] webData(String fileName)
+	public static Object[][] webData()
 	{
-		Object[][] arrayObject = TestHelpers.getWebData(fileName);
+		Object[][] arrayObject = getWebData(dataFileName, 2);
 		return arrayObject;
 	}
 
-	@Before
-	public void before()
+	@Parameters({ "fileName" })
+	@BeforeTest
+	public void before(String fileName)
 	{
+		System.out.println("Before Test");
+		System.out.println("s = " + fileName);
+		dataFileName = fileName;
 		System.err.println("Running Test " + ++testNumber);
 	}
 
-	@After
+	@AfterTest
 	public void after()
 	{
 		System.err.println("Finished Running Test " + testNumber);
@@ -51,30 +56,13 @@ public class TestChallengeFour
 		Automation.driver = null;
 	}
 
-	@Test
-	public void testMiles()
+	@Test(dataProvider = "webData")
+	public void testMiles(String resort, String miles)
 	{
-		resortsCompare.pageLoad();
-		final Map<String,Integer> dMap = new HashMap<String,Integer>();
-		{
-			dMap.put("Beaver Mountain", 114);
-			dMap.put("Alta", 32);
-			dMap.put("Beaver Mountain", 114);
-			dMap.put("Brian Head Ski Resort", 35);
-			dMap.put("Brighton", 35);
-			dMap.put("Cherry Peak", 99);
-			dMap.put("Deer Valley Resort", 36);
-			dMap.put("Eagle Point", 217);
-			dMap.put("Nordic Valley", 51);
-			dMap.put("Park City Mountain", 32);
-			dMap.put("Powder Mountain", 55);
-			dMap.put("Snowbasin Resort", 45);
-		}
+		System.out.println("RUNNING THE DAMN TEST");
 
-		for (Map.Entry<String, Integer> entry : dMap.entrySet())
-		{
-			int miles = resortsCompare.getMilesForResort(entry.getKey());
-			assertEquals(entry.getValue().intValue(), miles);
-		}
+		resortsCompare.pageLoad();
+
+		assertEquals(miles, resortsCompare.getMilesForResort(resort));
 	}
 }

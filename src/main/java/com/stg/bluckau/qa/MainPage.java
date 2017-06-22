@@ -53,6 +53,6 @@ public class MainPage
 		builder.moveToElement(menuElement).perform();
 
 		//look for the element now instead of before it exists
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Photos"))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(menu))).click();
 	}
 }

@@ -127,6 +127,7 @@ public class TestChallengeFive
 		 */
 
 		List<String> resorts = getResorts();
+		System.out.println(resorts);
 		List<String> categories = getCategories();
 		List<String> subCategories = getSubCategories();
 
