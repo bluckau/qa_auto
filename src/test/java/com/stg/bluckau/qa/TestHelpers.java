@@ -15,7 +15,6 @@ public class TestHelpers
 {
 	public static void printArray(Object[][] array, int columns)
 	{
-		System.out.println("calle3d print array; Kaloo, Kalay!");
 		int rows = array.length;
 		System.out.println("rows = " + rows);
 		System.out.println("columns = " + columns);
@@ -57,8 +56,6 @@ public class TestHelpers
 		}
 
 		String[][] theArray = null;
-		System.out.println("about to try");
-		try
 		{
 			POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream(fileName));
 			HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
@@ -100,7 +97,7 @@ public class TestHelpers
 			}
 			System.out.println("Close workbook");
 			workBook.close();
-		} catch (IOException e)
+		} catch(IOException e)
 		{
 			e.printStackTrace();
 		}

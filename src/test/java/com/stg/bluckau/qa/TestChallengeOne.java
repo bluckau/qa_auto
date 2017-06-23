@@ -17,22 +17,24 @@ public class TestChallengeOne
 	private static int testNumber;
 	private static MainPage mainPage;
 	private static String dataFileName;
+	private static int columnsToRead;
 
 	@DataProvider(name = "webData")
 	public static Object[][] webData()
 	{
 		System.out.println("**** get web data ****");
-		Object[][] arrayObject = TestHelpers.getWebData(dataFileName, 2);
+		Object[][] arrayObject = TestHelpers.getWebData(dataFileName, columnsToRead);
 		return arrayObject;
 	}
 
-	@Parameters({ "fileName" })
+	@Parameters({ "fileName", "columns" })
 	@BeforeTest
-	public void before(@Optional("url_verification.xls") String fileName)
+	public void before(@Optional("url_verification.xls") String fileName, @Optional("2") String columns)
 	{
 		System.out.println("Before Test");
 		System.out.println("s = " + fileName);
 		dataFileName = fileName;
+		columnsToRead = Integer.parseInt(columns);
 		System.err.println("Running Test " + ++testNumber);
 	}
 

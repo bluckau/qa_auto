@@ -6,6 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -31,35 +32,34 @@ public class TestChallengeThree
 		}
 		Object[][] theArray = TestHelpers.getWebData(dataFileName, columnsToRead);
 
-		System.out.println("we just got it. Is it null?");
-		if (theArray == null)
-		{
-			System.out.println("atal. it was null");
-			System.exit(1);
-		}
-		else
-			System.out.println("whew!");
+		// System.out.println("we just got it. Is it null?");
+		// if (theArray == null)
+		// {
+		// System.out.println("atal. it was null");
+		// System.exit(1);
+		// }
+		// else
+		// System.out.println("whew!");
 
-		System.out.println("THIS IS SUPPOSED TO NOW CALL PRINT ARRAY");
+		// System.out.println("THIS IS SUPPOSED TO NOW CALL PRINT ARRAY");
 		TestHelpers.printArray(theArray, 3);
-		System.out.println("SUPPOSED TO BE DONE");
-		;
+		// System.out.println("SUPPOSED TO BE DONE");
 
-		System.out.println("GOT THE ARRAY!");
+		// System.out.println("GOT THE ARRAY!");
 		System.out.println("dp: Got array of size " + theArray.length);
 		System.out.println(theArray.length);
 		System.out.println(theArray[0].length);
-		System.out.println("about to return the array");
+		// System.out.println("about to return the array");
 		return theArray;
 	}
 
 	@Parameters({ "fileName", "columnsToRead" })
 	@BeforeTest
-	public void before()
+	public void before(@Optional("submenus.xls") String name, @Optional("3") String columns)
 	{
 		System.out.println("before");
-		dataFileName = "submenus.xls";
-		columnsToRead = 3;
+		dataFileName = name;
+		columnsToRead = Integer.parseInt(columns);
 		System.out.println("Before Test");
 		System.out.println("fileName = " + dataFileName);
 		System.out.println("Columns " + columnsToRead);

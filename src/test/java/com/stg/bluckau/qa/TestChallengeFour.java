@@ -56,10 +56,7 @@ public class TestChallengeFour
 	@Test(dataProvider = "webData")
 	public void testMiles(String resort, String miles)
 	{
-		System.out.println("RUNNING THE DAMN TEST");
-
 		resortsCompare.pageLoad();
-
 		assertEquals(miles, resortsCompare.getMilesForResort(resort));
 	}
 }

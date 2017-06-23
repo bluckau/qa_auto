@@ -7,6 +7,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -16,6 +17,7 @@ public class TestChallengeTwo
 	private static int testNumber;
 	private static MainPage mainPage;
 	private static String dataFileName;
+	private static String columnsToRead;
 
 	@DataProvider(name = "webData")
 	public static Object[][] webData()
@@ -32,11 +34,12 @@ public class TestChallengeTwo
 
 	@Parameters({ "fileName" })
 	@BeforeTest
-	public void before(String fileName)
+	public void before(@Optional("menus.xml") String fileName, @Optional("2") String columns)
 	{
 		System.out.println("Before Test");
 		System.out.println("fileName = " + fileName);
 		dataFileName = fileName;
+		columnsToRead = columns;
 		System.err.println("Running Test " + ++testNumber);
 	}
 
@@ -61,7 +64,7 @@ public class TestChallengeTwo
 
 	@Test(dataProvider = "webData")
 	// TODO: stop having to take extra strings
-	public void testNav1(String menuOption, String validationString, String s1, String s2, String s3, String s4)
+	public void testNav1(String menuOption, String validationString)
 	{
 		System.err.println("Testing menu: " + menuOption);
 		System.err.println("ValidationString: " + validationString);
