@@ -1,8 +1,7 @@
 package com.stg.bluckau.qa;
 
 import static org.junit.Assert.assertEquals;
-import static com.stg.bluckau.qa.*;
-import static com.stg.bluckau.qa.TestHelpers.getWebData;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;

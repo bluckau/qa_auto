@@ -1,7 +1,5 @@
 package com.stg.bluckau.qa;
 
-import static org.testng.Assert.assertEquals;
-
 import java.io.File;
 
 import org.testng.annotations.AfterClass;

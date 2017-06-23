@@ -1,9 +1,7 @@
 package com.stg.bluckau.qa;
 
+import static com.stg.bluckau.qa.TestHelpers.getWebData;
 import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
@@ -12,7 +10,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static com.stg.bluckau.qa.TestHelpers.getWebData;
 
 public class TestChallengeFour
 {
