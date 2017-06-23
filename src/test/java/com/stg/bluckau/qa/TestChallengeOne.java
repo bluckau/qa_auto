@@ -28,7 +28,7 @@ public class TestChallengeOne
 
 	@Parameters({ "fileName" })
 	@BeforeTest
-	public void before(@Optional String fileName)
+	public void before(@Optional("url_verification.xls") String fileName)
 	{
 		if (fileName == null || "".equals(fileName))
 			fileName = "url_verification.xls";
