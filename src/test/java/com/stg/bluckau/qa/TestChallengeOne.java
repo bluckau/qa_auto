@@ -30,8 +30,6 @@ public class TestChallengeOne
 	@BeforeTest
 	public void before(@Optional("url_verification.xls") String fileName)
 	{
-		if (fileName == null || "".equals(fileName))
-			fileName = "url_verification.xls";
 		System.out.println("Before Test");
 		System.out.println("s = " + fileName);
 		dataFileName = fileName;
