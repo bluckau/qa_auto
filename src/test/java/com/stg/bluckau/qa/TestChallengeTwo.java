@@ -22,7 +22,7 @@ public class TestChallengeTwo
 	{
 		System.out.println("**** get web data ****");
 		System.out.println("File name: " + dataFileName + ";");
-		Object[][] arrayObject = TestHelpers.getWebData(dataFileName);
+		Object[][] arrayObject = TestHelpers.getWebData(dataFileName, 3);
 
 		System.out.println(arrayObject.length);
 		System.out.println(arrayObject[0].length);
