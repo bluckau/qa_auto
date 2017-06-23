@@ -24,7 +24,7 @@ public class TestChallengeTwo
 	{
 		System.out.println("**** get web data ****");
 		System.out.println("File name: " + dataFileName + ";");
-		Object[][] arrayObject = TestHelpers.getWebData(dataFileName, 3);
+		Object[][] arrayObject = TestHelpers.getWebData(dataFileName, Integer.parseInt(columnsToRead));
 
 		System.out.println(arrayObject.length);
 		System.out.println(arrayObject[0].length);
@@ -32,9 +32,9 @@ public class TestChallengeTwo
 	}
 
 
-	@Parameters({ "fileName" })
+	@Parameters({ "fileName", "columnsToRead" })
 	@BeforeTest
-	public void before(@Optional("menus.xml") String fileName, @Optional("2") String columns)
+	public void before(@Optional("menus.xls") String fileName, @Optional("2") String columns)
 	{
 		System.out.println("Before Test");
 		System.out.println("fileName = " + fileName);

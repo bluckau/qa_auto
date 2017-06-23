@@ -56,6 +56,7 @@ public class TestHelpers
 		}
 
 		String[][] theArray = null;
+		try
 		{
 			POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream(fileName));
 			HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
@@ -68,7 +69,7 @@ public class TestHelpers
 			rows = sheet.getPhysicalNumberOfRows();
 			System.out.println("Found number of rows as:" + rows);
 			System.out.println("num of coumns is:");
-			theArray = new String[rows][columns];
+			theArray = new String[rows - 1][columns];
 
 			// start at row 1 not 0
 			for (int r = 1; r < rows; r++)
@@ -97,7 +98,7 @@ public class TestHelpers
 			}
 			System.out.println("Close workbook");
 			workBook.close();
-		} catch(IOException e)
+		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}

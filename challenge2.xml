@@ -3,7 +3,7 @@
 <suite name="Suite1">
 	<test name="Test Challenge2">
     	<parameter name="fileName" value="menus.xls"/>
-    	<parameter name "columnsToRead" value = "2"/>
+    	<parameter name="columnsToRead" value="2"/>
     	<classes>
 	        <class name="com.stg.bluckau.qa.TestChallengeTwo"/>
 	    </classes>

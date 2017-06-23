@@ -68,6 +68,7 @@ public class TestChallengeOne
 		System.out.println("****testTitle***");
 		mainPage.pageLoad();
 		String title = Automation.getPageTitle();
-		assertEquals(title, verificationText);
+		if (verificationText != null)
+			assertEquals(title, verificationText);
 	}
 }
