@@ -32,24 +32,12 @@ public class TestChallengeThree
 		}
 		Object[][] theArray = TestHelpers.getWebData(dataFileName, columnsToRead);
 
-		// System.out.println("we just got it. Is it null?");
-		// if (theArray == null)
-		// {
-		// System.out.println("atal. it was null");
-		// System.exit(1);
-		// }
-		// else
-		// System.out.println("whew!");
 
-		// System.out.println("THIS IS SUPPOSED TO NOW CALL PRINT ARRAY");
-		TestHelpers.printArray(theArray, 3);
-		// System.out.println("SUPPOSED TO BE DONE");
+		TestHelpers.printArray(theArray, columnsToRead);
 
-		// System.out.println("GOT THE ARRAY!");
 		System.out.println("dp: Got array of size " + theArray.length);
 		System.out.println(theArray.length);
 		System.out.println(theArray[0].length);
-		// System.out.println("about to return the array");
 		return theArray;
 	}
 
@@ -81,9 +69,9 @@ public class TestChallengeThree
 	public void testNav1(String menuOption, String subMenu, String validationString)
 	{
 		mainPage.pageLoad();
-		// System.out.println("menu " + menuOption);
-		// System.out.println("subMenu " + subMenu);
-		// System.out.println("validationString " + validationString);
+		System.out.println("menu " + menuOption);
+		System.out.println("subMenu " + subMenu);
+		System.out.println("validationString " + validationString);
 
 		System.out.printf("gotoSubMenu(%s, %s);", menuOption, subMenu);
 		mainPage.goToSubMenu(menuOption, subMenu);

@@ -3,14 +3,7 @@
 <suite name="Suite">
   <test name="Test">
     <classes>
-      <class name="com.stg.bluckau.qa.TestChallengeEight"/>
-      <class name="com.stg.bluckau.qa.TestChallengeTwo"/>
       <class name="com.stg.bluckau.qa.TestChallengeOne"/>
-      <class name="com.stg.bluckau.qa.TestChallengeSeven"/>
-      <class name="com.stg.bluckau.qa.TestChallengeThree"/>
-      <class name="com.stg.bluckau.qa.TestChallengeSix"/>
-      <class name="com.stg.bluckau.qa.TestChallengeFour"/>
-      <class name="com.stg.bluckau.qa.TestChallengeFive"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

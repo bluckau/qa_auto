@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite1">
+<suite name="Suite3">
 	<test name="Test Challenge3">
     	<parameter name="fileName" value="submenus.xls"/>
-    	<parameter name "columnsToRead" value = "3"/>
+    	<parameter name="columnsToRead" value = "3"/>
     	<classes>
 	        <class name="com.stg.bluckau.qa.TestChallengeThree"/>
 	    </classes>

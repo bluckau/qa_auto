@@ -3,6 +3,8 @@ package com.stg.bluckau.qa;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -16,19 +18,19 @@ public class TestHelpers
 	public static void printArray(Object[][] array, int columns)
 	{
 		int rows = array.length;
-		System.out.println("rows = " + rows);
-		System.out.println("columns = " + columns);
+		// System.out.println("rows = " + rows);
+		// System.out.println("columns = " + columns);
 
 		for (int i = 0; i < rows; i++)
 		{
-			System.out.print("processing row " + i);
+			// System.out.print("processing row " + i);
 
 			for (int j = 0; j < columns; j++)
 			{
-				System.out.println("Is [i][j] null?");
-				System.out.println(array[i][j]);
+				/// System.out.println("Is [i][j] null?");
+				// System.out.println(array[i][j]);
 
-				System.out.print("processing column " + j);
+				// System.out.print("processing column " + j);
 				Object temp = array[i][j];
 				if (temp != null)
 				{
@@ -42,6 +44,7 @@ public class TestHelpers
 			System.out.println();
 		}
 	}
+
 	public static Object[][] getWebData(String fileName, int columns)
 	{
 		System.out.println("****getWebData");
@@ -88,13 +91,14 @@ public class TestHelpers
 
 							if (!("".equals(cellData)))
 							{
-								System.out.println("Adding to the array " + cellData.toString());
+								// System.out.println("Adding to the array " +
+								// cellData.toString());
 								theArray[r - 1][c] = cellData;
 							}
 						}
 					}
 				}
-				System.out.println("Done processing row " + r);
+				// System.out.println("Done processing row " + r);
 			}
 			System.out.println("Close workbook");
 			workBook.close();
@@ -109,6 +113,79 @@ public class TestHelpers
 		printArray(theArray, columns);
 
 		return theArray;
+	}
 
+	public static Object[][] getSearchData(String fileName)
+	{
+
+		List<String> resorts = new LinkedList<String>();
+
+		int columns=3;
+
+		System.out.println("****getSearchData");
+		System.out.println("file name: " + fileName);
+		if (new File(fileName).exists())
+		{
+			System.out.println("file exists");
+		} else
+		{
+			System.out.println("File " + fileName + "not exist");
+			System.exit(99);
+		}
+
+		String[][] theArray = null;
+		try
+		{
+			POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream(fileName));
+			HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
+			HSSFSheet sheet = workBook.getSheetAt(0);
+			HSSFRow row;
+			// HSSFCell cell;
+
+			// get the resorts
+
+			int rows = 0;
+			String cellData = "";
+			rows = sheet.getPhysicalNumberOfRows();
+
+			System.out.println("Found number of rows as:" + rows);
+			theArray = new String[rows - 1][columns];
+
+			// start at row 1 not 0
+			for (int r = 1; r < rows; r++)
+			{
+				row = sheet.getRow(r);
+				// if (row != null)
+				// {
+				//add the first column entry which is a resort
+				//(the first column is a list of resorts)
+
+				HSSFCell tmpc = row.getCell(0);
+				System.out.println(tmpc);
+				if (tmpc != null)
+				{
+					DataFormatter formatter = new DataFormatter();
+					cellData = formatter.formatCellValue(tmpc);
+					System.out.println("ADDING " + cellData);
+					if (!("".equals(cellData)))
+					{
+						System.out.println("ADDING " + cellData);
+						resorts.add(cellData);
+					}
+				}
+				// }
+
+			}
+			System.out.println("Close workbook");
+			workBook.close();
+			System.exit(1);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		printArray(theArray, columns);
+
+		return theArray;
 	}
 }
