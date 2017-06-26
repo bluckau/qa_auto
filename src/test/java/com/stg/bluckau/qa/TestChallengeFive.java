@@ -24,10 +24,8 @@ public class TestChallengeFive
 	private static SearchPage searchPage;
 	private static int testNumber = 0;
 	By resortsList = By.cssSelector("div.ListingFilter-column.ListingFilter-column--categories");
-	private static int columnsToRead;
 	private static String dataFileName;
 	private static String resortsFileName;
-	private static String resorts;
 
 	@DataProvider(name = "webData")
 	public static Object[][] webData()
@@ -48,7 +46,7 @@ public class TestChallengeFive
 	@AfterTest
 	public void after()
 	{
-		System.err.println("Finished Running Test " + testNumber);
+		// system.err.println("Finished Running Test " + testNumber);
 	}
 
 	@BeforeClass
@@ -66,63 +64,6 @@ public class TestChallengeFive
 		Automation.driver = null;
 	}
 
-
-
-
-	// public List<String> getResorts()
-	// {
-	//
-	// List<String> resorts = new ArrayList<String>();
-	// WebElement resortsListTop = driver.findElement(resortsList);
-	//
-	// // Find subelements that are resorts
-	// List<WebElement> resortElements = resortsListTop.findElements(
-	// By.xpath("//div[@class='div.ListingFilter-column.ListingFilter-column--categories']//./div/select/*"));
-	// for (WebElement row : resortElements)
-	// {
-	// // System.out.println("iterate");
-	// // System.out.println("Adding" + row.getAttribute("innerHTML"));
-	// resorts.add(row.getAttribute("innerHTML"));
-	// }
-	// return resorts;
-	// }
-
-	// public List<String> getCategories()
-	// {
-	// List<String> cats = new ArrayList<String>();
-	//
-	// By categoriesList =
-	// By.cssSelector("div.ListingFilter-column.ListingFilter-column--location");
-	// WebElement resortsListTop = driver.findElement(categoriesList);
-	//
-	// List<WebElement> resortElements =
-	// resortsListTop.findElements(By.xpath("//./div/select/*"));
-	// for (WebElement row : resortElements)
-	// {
-	// // System.out.println("Adding " + row.getAttribute("innerHTML"));
-	// cats.add(row.getAttribute("innerHTML"));
-	// }
-	// return cats;
-	// }
-
-	// public List<String> getSubCategories()
-	// {
-	// List<String> cats = new ArrayList<String>();
-	//
-	// By categoriesList =
-	// By.cssSelector("div.ListingFilter-column.ListingFilter-column--location");
-	// WebElement resortsListTop = driver.findElement(categoriesList);
-	//
-	// List<WebElement> resortElements =
-	// resortsListTop.findElements(By.xpath("//./div/select/*"));
-	// for (WebElement row : resortElements)
-	// {
-	// // System.out.println("Adding" + row.getAttribute("innerHTML"));
-	// cats.add(row.getAttribute("innerHTML"));
-	// }
-	// return cats;
-	// }
-	// Search for Transportation, Taxi, Alta
 	@Test
 	public void testSearch1()
 	{

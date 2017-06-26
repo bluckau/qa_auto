@@ -48,7 +48,7 @@ public class TestChallengeThree
 		System.out.println("before");
 		dataFileName = name;
 		columnsToRead = Integer.parseInt(columns);
-		System.out.println("Before Test");
+		// System.out.println("Before Test");
 		System.out.println("fileName = " + dataFileName);
 		System.out.println("Columns " + columnsToRead);
 	}
@@ -65,7 +65,7 @@ public class TestChallengeThree
 		Automation.driver = null;
 	}
 
-	// @Test(dataProvider = "webData")
+	@Test(dataProvider = "webData")
 	public void testNav1(String menuOption, String subMenu, String validationString)
 	{
 		mainPage.pageLoad();

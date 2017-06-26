@@ -4,7 +4,6 @@
 	<test name="Test Challenge3">
     	<parameter name="fileName" value="submenus.xls"/>
     	<parameter name="columnsToRead" value = "3"/>
-    	<parameter email="brian.luckau@stg.com/>"
     	<classes>
 	        <class name="com.stg.bluckau.qa.TestChallengeThree"/>
 	    </classes>

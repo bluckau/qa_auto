@@ -40,7 +40,7 @@ public class TestChallengeTwo
 		System.out.println("fileName = " + fileName);
 		dataFileName = fileName;
 		columnsToRead = columns;
-		System.err.println("Running Test " + ++testNumber);
+		// System.err.println("Running Test " + ++testNumber);
 	}
 
 	@AfterTest
@@ -62,12 +62,12 @@ public class TestChallengeTwo
 		Automation.driver = null;
 	}
 
-	// @Test(dataProvider = "webData")
+	@Test(dataProvider = "webData")
 	// TODO: stop having to take extra strings
 	public void testNav1(String menuOption, String validationString)
 	{
-		System.err.println("Testing menu: " + menuOption);
-		System.err.println("ValidationString: " + validationString);
+		// System.err.println("Testing menu: " + menuOption);
+		// System.err.println("ValidationString: " + validationString);
 
 		mainPage.pageLoad();
 		mainPage.goToMenu(menuOption, true);
