@@ -20,7 +20,7 @@
     <url>http://jcenter.bintray.com</url>
   </repository>
 </repositories>
-  <build>
+  <!-- <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
@@ -48,7 +48,7 @@
       	<version>2.20</version>
       </plugin>
     </plugins>
-</build>
+</build>-->
   <dependencies>
     <dependency>
     	<groupId>io.github.bonigarcia</groupId>
