@@ -88,14 +88,14 @@ public class TestChallengeSix
 
 	// Right now the following will only make sure it works without throwing any
 	// exceptions.
-	@Test
+	//@Test
 	public void testCrawl1()
 	{
 		webCrawler.setLinksLimit(2);
 		webCrawler.walkSite();
 	}
 
-	@Test
+	// @Test
 	public void testCrawl2()
 	{
 		webCrawler.setLinksLimit(0);

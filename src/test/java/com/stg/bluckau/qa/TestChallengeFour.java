@@ -56,7 +56,7 @@ public class TestChallengeFour
 		Automation.driver = null;
 	}
 
-	@Test(dataProvider = "webData")
+	// @Test(dataProvider = "webData")
 	public void testMiles(String resort, String miles)
 	{
 		resortsCompare.pageLoad();

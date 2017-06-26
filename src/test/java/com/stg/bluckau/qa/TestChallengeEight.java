@@ -85,7 +85,7 @@ public class TestChallengeEight
 	}
 
 
-	@Test
+	// @Test
 	public void testBrokenImage()
 	{
 		driver.get("http://the-internet.herokuapp.com/broken_images");

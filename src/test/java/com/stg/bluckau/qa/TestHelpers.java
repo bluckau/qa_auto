@@ -3,6 +3,7 @@ package com.stg.bluckau.qa;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -115,28 +116,12 @@ public class TestHelpers
 		return theArray;
 	}
 
-	public static Object[][] getSearchData(String fileName)
+	public static List<String> getResorts(String resortsFileName)
 	{
-
-		List<String> resorts = new LinkedList<String>();
-
-		int columns=3;
-
-		System.out.println("****getSearchData");
-		System.out.println("file name: " + fileName);
-		if (new File(fileName).exists())
-		{
-			System.out.println("file exists");
-		} else
-		{
-			System.out.println("File " + fileName + "not exist");
-			System.exit(99);
-		}
-
-		String[][] theArray = null;
+		List<String> list = new ArrayList<String>();
 		try
 		{
-			POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream(fileName));
+			POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream(resortsFileName));
 			HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
 			HSSFSheet sheet = workBook.getSheetAt(0);
 			HSSFRow row;
@@ -149,16 +134,12 @@ public class TestHelpers
 			rows = sheet.getPhysicalNumberOfRows();
 
 			System.out.println("Found number of rows as:" + rows);
-			theArray = new String[rows - 1][columns];
+
 
 			// start at row 1 not 0
 			for (int r = 1; r < rows; r++)
 			{
 				row = sheet.getRow(r);
-				// if (row != null)
-				// {
-				//add the first column entry which is a resort
-				//(the first column is a list of resorts)
 
 				HSSFCell tmpc = row.getCell(0);
 				System.out.println(tmpc);
@@ -170,7 +151,7 @@ public class TestHelpers
 					if (!("".equals(cellData)))
 					{
 						System.out.println("ADDING " + cellData);
-						resorts.add(cellData);
+						list.add(cellData);
 					}
 				}
 				// }
@@ -184,8 +165,30 @@ public class TestHelpers
 			e.printStackTrace();
 		}
 
-		printArray(theArray, columns);
+		return list;
+	}
 
-		return theArray;
+	public static Object[][] getSearchData(String searchFileName, String resortsFileName)
+	{
+
+		List<String> resorts = new LinkedList<String>();
+
+
+		resorts = getResorts(resortsFileName);
+
+		Object[][] combinationsArray = getWebData(searchFileName, 2);
+		Object[][] parametersArray = new String[resorts.size()][3];
+		// iterate over resorts, build the array of combinations
+		int count=0;
+		for (String s : resorts)
+		{
+			count++;
+			String[] rowArray = new String[3];
+			rowArray[0] = s;
+			rowArray[1] = combinationsArray[count - 1][0].toString();
+			rowArray[2] = combinationsArray[count - 1][1].toString();
+		}
+
+		return parametersArray;
 	}
 }

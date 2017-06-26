@@ -26,13 +26,14 @@ public class TestChallengeFive
 	By resortsList = By.cssSelector("div.ListingFilter-column.ListingFilter-column--categories");
 	private static int columnsToRead;
 	private static String dataFileName;
+	private static String resortsFileName;
 	private static String resorts;
 
 	@DataProvider(name = "webData")
 	public static Object[][] webData()
 	{
 		System.out.println("**** PROVIDER ****");
-		Object[][] arrayObject = TestHelpers.getSearchData(dataFileName);
+		Object[][] arrayObject = TestHelpers.getSearchData(dataFileName, resortsFileName);
 		return arrayObject;
 	}
 
@@ -64,6 +65,9 @@ public class TestChallengeFive
 		Automation.quit();
 		Automation.driver = null;
 	}
+
+
+
 
 	// public List<String> getResorts()
 	// {
@@ -138,34 +142,23 @@ public class TestChallengeFive
 	}
 
 	// Search for Transportation, Taxi, Alta
-	@Test(dataProvider = "webData")
-	public void testSearch2(String resort, String menu, String submenu)
+	// @Test(dataProvider = "webData")
+	public void testSearch2(String resort, String menu, String subMenu)
 	{
-		assertTrue(1 == 1);
+
 		/*
-		 * Search all combinations. Not validating the output, but making sure
-		 * they all complete without exception (for now at least)
-		 *
+		 * Basic search for one combination. May need to pull the results
+		 * comparison out because these result sets change constantly. You would
+		 * have to be fed a dynamic list of desired output values.
 		 */
 
-		// List<String> resorts = getResorts();
-		// System.out.println(resorts);
-		// List<String> categories = getCategories();
-		// List<String> subCategories = getSubCategories();
+		searchPage.searchForCombination(resort, menu, subMenu);
 
-		// Test every combination to make sure it does not error out
-		// TODO: need to take into account the mapping between category and
-		// subcategory
-		//		for (String resort : resorts)
-		//		{
-		//			for (String cat : categories)
-		//			{
-		//				for (String subCat : subCategories)
-		//				{
-		//System.err.printf("Testing %s + %s + %s", cat, subCat, resort);
-		//searchPage.searchForCombination(category, subCategory, resort);
-		//				}
-		//searchPage.getSearchResults();
+		List<String> results = new ArrayList<String>();
+		results = searchPage.getSearchResults();
+
+		assertEquals(results.size(), 1);
+		assertEquals("Uber", results.get(0));
 
 	}
 	//	}

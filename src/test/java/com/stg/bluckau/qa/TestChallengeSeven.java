@@ -47,7 +47,7 @@ public class TestChallengeSeven
 		Automation.driver = null;
 	}
 
-	@Test
+	// @Test
 	public void testDictionary()
 	{
 		// Speed up this test

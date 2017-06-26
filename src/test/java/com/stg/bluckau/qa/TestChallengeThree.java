@@ -65,7 +65,7 @@ public class TestChallengeThree
 		Automation.driver = null;
 	}
 
-	@Test(dataProvider = "webData")
+	// @Test(dataProvider = "webData")
 	public void testNav1(String menuOption, String subMenu, String validationString)
 	{
 		mainPage.pageLoad();

@@ -62,7 +62,7 @@ public class TestChallengeTwo
 		Automation.driver = null;
 	}
 
-	@Test(dataProvider = "webData")
+	// @Test(dataProvider = "webData")
 	// TODO: stop having to take extra strings
 	public void testNav1(String menuOption, String validationString)
 	{
