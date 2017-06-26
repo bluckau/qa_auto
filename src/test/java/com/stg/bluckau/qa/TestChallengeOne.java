@@ -39,9 +39,13 @@ public class TestChallengeOne
 	}
 
 
+	@Parameters({ "recipients" })
 	@AfterTest
-	public void after()
+	public void after(@Optional("brian.luckau@stgconsulting.com") String recipient)
 	{
+		EmailHandler eh = new EmailHandler();
+		eh.dispatchEmail(new Object());
+
 		// System.err.println("Finished Running Test " + testNumber);
 	}
 
