@@ -35,21 +35,21 @@ public class TestChallengeOne
 		System.out.println("s = " + fileName);
 		dataFileName = fileName;
 		columnsToRead = Integer.parseInt(columns);
-		System.err.println("Running Test " + ++testNumber);
+		// System.err.println("Running Test " + ++testNumber);
 	}
 
 
 	@AfterTest
 	public void after()
 	{
-		System.err.println("Finished Running Test " + testNumber);
+		// System.err.println("Finished Running Test " + testNumber);
 	}
 
 
 	@BeforeClass
 	public static void beforeClass()
 	{
-		System.out.println("Before class");
+		// System.out.println("Before class");
 		mainPage = new MainPage();
 	}
 

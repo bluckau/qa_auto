@@ -30,7 +30,7 @@ public class TestChallengeFour
 	@BeforeTest
 	public void before(@Optional("miles.xls") String fileName, @Optional("2") String columns)
 	{
-		System.out.println("Before Test");
+		// System.out.println("Before Test");
 		System.out.println("s = " + fileName);
 		dataFileName = fileName;
 		columnsToRead = Integer.parseInt(columns);
@@ -40,7 +40,7 @@ public class TestChallengeFour
 	@AfterTest
 	public void after()
 	{
-		System.err.println("Finished Running Test " + testNumber);
+		// System.err.println("Finished Running Test " + testNumber);
 	}
 
 	@BeforeClass

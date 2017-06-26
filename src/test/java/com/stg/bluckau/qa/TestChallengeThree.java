@@ -48,7 +48,7 @@ public class TestChallengeThree
 		System.out.println("before");
 		dataFileName = name;
 		columnsToRead = Integer.parseInt(columns);
-		System.out.println("Before Test");
+		// System.out.println("Before Test");
 		System.out.println("fileName = " + dataFileName);
 		System.out.println("Columns " + columnsToRead);
 	}
