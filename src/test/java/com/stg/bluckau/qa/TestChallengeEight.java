@@ -29,7 +29,6 @@ public class TestChallengeEight
 	private static String dataFileName;
 	private static int columnsToRead;
 
-	// ----THIS IS THE DATA PROVIDER----
 	@DataProvider(name = "webData")
 	public static Object[][] webData()
 	{
