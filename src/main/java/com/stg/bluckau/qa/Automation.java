@@ -24,11 +24,21 @@ public class Automation {
 		return driver;
 	}
 
+	/**
+	 *
+	 * @return the instance of WebDriverWait
+	 */
 	public static WebDriverWait getWait()
 	{
 		return wait;
 	}
 
+	/**
+	 *
+	 * @param n
+	 *            The number of seconds to snooze
+	 *
+	 */
 	public static void snooze(int n)
 	{
 		try {
@@ -39,6 +49,10 @@ public class Automation {
 		}
 	}
 
+	/**
+	 *
+	 * @return The page title of the current web page
+	 */
 	public static String getPageTitle()
 	{
 		return driver.getTitle();
