@@ -4,6 +4,7 @@
 	<test name="Test Challenge8">
     	<parameter name="fileName" value = "menuurls.xls"/>
     	<parameter name="columnsToRead" value = "2"/>
+    	<parameter name="email" value = "brian.luckau@stg.com,bluckau@luckau.us"/>
     	<classes>
 	        <class name="com.stg.bluckau.qa.TestChallengeEight"/>
 	    </classes>
