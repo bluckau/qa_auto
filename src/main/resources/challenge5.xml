@@ -3,7 +3,7 @@
 <suite name="Suite1">
 	<test name="Test Challenge4">
 		<parameter name="resortsFileName" value=resorts.xls/>
-    	<parameter name="fileName" value = "searches.xls"/>
+    	<parameter name="fileName" value = "src/main/resources/searches.xls"/>
     	<parameter name="columnsToRead" value = "2"/>
     	<parameter name="email" value = "brian.luckau@stg.com,bluckau@luckau.us"/>
     	<classes>

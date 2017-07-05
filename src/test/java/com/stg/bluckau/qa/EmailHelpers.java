@@ -10,7 +10,8 @@ public class EmailHelpers
 	public void sendTestResults(String addresses, String from)
 	{
 
-		EmailProperties emailProperties = new EmailProperties(addresses, from, "mail.properties", "body text",
+		EmailProperties emailProperties = new EmailProperties(addresses, from, "src/main/resources/mail.properties",
+				"body text",
 				"SubJECT");
 		EmailHandler emailHandler = new EmailHandler(emailProperties);
 		emailHandler.dispatchEmail();
