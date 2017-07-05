@@ -1,93 +1,98 @@
 package com.stg.bluckau.qa;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.InetAddress;
+//import java.net.InetAddress;
 import java.util.Properties;
-import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
+//import javax.activation.*;
 
 public class EmailHandler
 {
-	// TODO: do not hard code
-	private static final String SMTPServer = "smtp.gmail.com";
-	// private static final int port = 465;
+	private static final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+	private String userName;
+	private String password;
+	private String smtpServer;
+	private String smtpPort;
+	private String useAuth;
+	private EmailProperties emailProperties;
 
-	private String subject = "Subject";
-	private String userName = "";
-	private String password = "";
-	private String from = "brian.luckau@stgconsulting.com";
-	private String to = "brian.luckau@stgconsulting.com";
-	private String fileName;
-
-	public EmailHandler(String toString, String subject, String fileName)
+	public EmailHandler(EmailProperties emailProperties)
 	{
-		this.to = toString;
-		this.subject = subject;
-		this.fileName = fileName;
+		this.emailProperties = emailProperties;
+		loadEmailAuth(emailProperties.getEmailAuthFileName());
 	}
 
-	public void getAuth(String fileName)
+
+	public void loadEmailAuth(String fileName)
 	{
-		Properties prop = new Properties();
+		Properties props = new Properties();
 		try
 		{
-			prop.load(new FileInputStream(fileName));
+			System.out.println("loading from file name: " + fileName);
+			props.load(new FileInputStream(fileName));
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		userName = prop.getProperty("username");
-		if (prop.getProperty("password") != null)
-		{
-			password = prop.getProperty("password");
-		}
-
+		userName = props.getProperty("username");
+		password = props.getProperty("password");
+		smtpServer = props.getProperty("smtp_server");
+		useAuth = props.getProperty("use_auth");
+		smtpPort = props.getProperty("smtp_port");
 	}
 
-	public void dispatchEmail(String address, String fileName)
+	// Dispatch multiple emails
+	public void dispatchEmail()
 	{
-		getAuth("mail.properties");
-		//Get the session object
-		Properties properties = System.getProperties();
-		properties.setProperty("mail.smtp.host",SMTPServer );
-		properties.put("mail.smtp.auth", "true");
+		String recipients;
+		recipients = emailProperties.getRecipients();
+		System.out.println("Recipients = " + recipients);
+		for (String recipient : emailProperties.getRecipients().split(","))
+		{
+			sendEmail(recipient, emailProperties);
+		}
+	}
 
-		Session session = Session.getDefaultInstance(properties,
+	public void sendEmail(String recipient, EmailProperties emailProperties)
+	{
+		//Get the session object
+		Properties sessionProperties = System.getProperties();
+
+		// create the properties to send to the mime message
+		System.err.println("smtpServer = " + smtpServer);
+		System.err.println("useAuthentication = " + useAuth);
+		// System.err.println("Password: " + password);
+		System.out.println("userName: " + userName);
+		sessionProperties.setProperty("mail.smtp.host", smtpServer);
+		sessionProperties.put("mail.smtp.port", smtpPort);
+		sessionProperties.put("mail.smtp.auth", useAuth);
+		sessionProperties.put("mail.smtp.", "true");
+		sessionProperties.put("mail.smtp.socketFactory.fallback", "false");
+		sessionProperties.put("mail.smtp.socketFactory.class", SSL_FACTORY);
+
+		Session session = Session.getDefaultInstance(sessionProperties,
 				new javax.mail.Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(userName,password);
+				return new PasswordAuthentication(userName, password);
 			} });
 
 		try{
 
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(from);
-			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
-			message.setSubject("Test Results");
+			message.setFrom(emailProperties.getSender());
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+			message.setSubject(emailProperties.getSubject());
 
 			BodyPart messageBodyPart = new MimeBodyPart();
 
-			messageBodyPart.setText("messagy body test");
 			Multipart multipart = new MimeMultipart();
-
 			multipart.addBodyPart(messageBodyPart);
-
-			// Part two is attachment
-			// Send the complete message parts
-
 			message.setContent(multipart);
-			// TODO: if filename is not null or empty?
-
-			String filename = "miles.xls";
-			DataSource source = new FileDataSource(fileName);
-			messageBodyPart.setDataHandler(new DataHandler(source));
-			messageBodyPart.setFileName(filename);
+			messageBodyPart.setText(emailProperties.getBody());
 			multipart.addBodyPart(messageBodyPart);
 
 			Transport.send(message);

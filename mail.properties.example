@@ -1,0 +1,5 @@
+username=user@example.com
+password=mypassword
+smtp_server=smtpout.example.com
+use_auth=true
+smtp_port=465

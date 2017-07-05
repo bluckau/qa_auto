@@ -2,6 +2,7 @@ package com.stg.bluckau.qa;
 
 import static org.junit.Assert.assertEquals;
 
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +15,6 @@ import org.testng.annotations.Test;
 
 public class TestChallengeOne
 {
-	private static int testNumber;
 	private static MainPage mainPage;
 	private static String dataFileName;
 	private static int columnsToRead;
@@ -41,11 +41,8 @@ public class TestChallengeOne
 
 	@Parameters({ "email" })
 	@AfterTest
-	public void after(@Optional("brian.luckau@stgconsulting.com") String recipient)
+	public void afterTest(@Optional("brian.luckau@stgconsulting.com") String recipient)
 	{
-		EmailHandler eh = new EmailHandler();
-		eh.dispatchEmail(new Object());
-
 		// System.err.println("Finished Running Test " + testNumber);
 	}
 
@@ -53,14 +50,19 @@ public class TestChallengeOne
 	@BeforeClass
 	public static void beforeClass()
 	{
-		// System.out.println("Before class");
+
 		mainPage = new MainPage();
 	}
 
 
 	@AfterClass
-	public static void afterclass()
+	@Parameters({ "email" })
+	public void afterClass(@Optional("brian.luckau@stgconsulting.com") String recipients)
 	{
+
+		EmailHelpers eh = new EmailHelpers();
+		eh.sendTestResults(recipients, "brian.luckau@stgconsulting.com");
+
 		Automation.quit();
 		Automation.driver = null;
 	}
