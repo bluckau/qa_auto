@@ -39,7 +39,7 @@ public class TestChallengeOne
 	}
 
 
-	@Parameters({ "recipients" })
+	@Parameters({ "email" })
 	@AfterTest
 	public void after(@Optional("brian.luckau@stgconsulting.com") String recipient)
 	{
