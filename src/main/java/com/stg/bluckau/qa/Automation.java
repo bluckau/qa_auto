@@ -8,6 +8,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
+/**
+ *
+ * @author Brian Luckau
+ * @version %I%, %G%
+ * @since 0.1
+ */
 public class Automation {
 	static WebDriver driver;
 	static WebDriverWait wait;
