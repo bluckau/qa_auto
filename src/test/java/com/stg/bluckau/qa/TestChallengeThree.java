@@ -1,5 +1,7 @@
 package com.stg.bluckau.qa;
 
+import static org.testng.Assert.assertEquals;
+
 import java.io.File;
 
 import org.testng.annotations.AfterClass;
@@ -32,9 +34,7 @@ public class TestChallengeThree
 		}
 		Object[][] theArray = TestHelpers.getWebData(dataFileName, columnsToRead);
 
-
-		TestHelpers.printArray(theArray, columnsToRead);
-
+		// TestHelpers.printArray(theArray, columnsToRead);
 		System.out.println("dp: Got array of size " + theArray.length);
 		System.out.println(theArray.length);
 		System.out.println(theArray[0].length);
@@ -69,15 +69,15 @@ public class TestChallengeThree
 	public void testNav1(String menuOption, String subMenu, String validationString)
 	{
 		mainPage.pageLoad();
-		System.out.println("menu " + menuOption);
-		System.out.println("subMenu " + subMenu);
-		System.out.println("validationString " + validationString);
+		System.out.print("menu " + menuOption);
+		System.out.println("  subMenu " + subMenu);
+		// System.out.println("validationString " + validationString);
 
 		System.out.printf("gotoSubMenu(%s, %s);", menuOption, subMenu);
 		mainPage.goToSubMenu(menuOption, subMenu);
 		Automation.snooze(5);
-		System.out.println(Automation.getPageTitle());
-		// assertEquals(Automation.getPageTitle(), validationString);
+		System.out.println("/n               " + Automation.getPageTitle() + "\n");
+		assertEquals(Automation.getPageTitle(), validationString);
 
 	}
 }

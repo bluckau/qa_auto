@@ -47,12 +47,11 @@ public class MainPage
 	{
 		Actions builder = new Actions(driver);
 		WebElement menuElement = driver.findElement(By.cssSelector("a[title=\'" + menu + "\']"));
-		driver = Automation.getDriver();
 
 		//hover
 		builder.moveToElement(menuElement).perform();
 
 		//look for the element now instead of before it exists
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(menu))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(subMenu))).click();
 	}
 }
