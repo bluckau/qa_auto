@@ -38,10 +38,10 @@
                <version>2.20</version>
                <inherited>true</inherited>
                <configuration>
-                   <!-- <suiteXmlFiles>
-                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
-                    </suiteXmlFiles>
-                    -->
+                   <suiteXmlFiles>
+                        <suiteXmlFile></suiteXmlFile>
+                   </suiteXmlFiles>
+                   
                    <properties>
             			<property>
               				<name>surefire.testng.verbose</name>

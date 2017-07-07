@@ -24,7 +24,7 @@ public class EmailHelpers
 			filesToSend = "test-output/emailable-report.html";
 		}
 
-		EmailProperties emailProperties = new EmailProperties(addresses, from, "src/main/resources/mail.properties",
+		EmailProperties emailProperties = new EmailProperties(addresses, from, "src/test/resources/mail.properties",
 				bodyText, "Test results from testng", filesToSend);
 		EmailHandler emailHandler = new EmailHandler(emailProperties);
 		emailHandler.dispatchEmail();
