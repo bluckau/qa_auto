@@ -39,7 +39,11 @@
                <inherited>true</inherited>
                <configuration>
                    <suiteXmlFiles>
-                        <suiteXmlFile></suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/src/test/resources/Challenge1.xml</suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/src/test/resources/Challenge2.xml</suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/src/test/resources/Challenge3.xml</suiteXmlFile>
+                        <suiteXmlFile>${project.basedir}/src/test/resources/Challenge4.xml</suiteXmlFile>
+                        
                    </suiteXmlFiles>
                    
                    <properties>
