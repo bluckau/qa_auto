@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite1">
-	<test name="Test Challenge2">
+	<test name="TestChallenge1">
     	<parameter name="fileName" value="src/main/resources/menus.xls"/>
     	<parameter name="columnsToRead" value="2"/>
     	<parameter name="email" value = "brian.luckau@stg.com,bluckau@luckau.us"/>

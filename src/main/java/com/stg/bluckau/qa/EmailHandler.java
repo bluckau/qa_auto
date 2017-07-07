@@ -4,6 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 //import java.net.InetAddress;
 import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
 //import javax.activation.*;
@@ -47,6 +51,7 @@ public class EmailHandler
 	// Dispatch multiple emails
 	public void dispatchEmail()
 	{
+
 		String recipients;
 		recipients = emailProperties.getRecipients();
 		System.out.println("Recipients = " + recipients);
@@ -91,9 +96,27 @@ public class EmailHandler
 
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
-			message.setContent(multipart);
+
 			messageBodyPart.setText(emailProperties.getBody());
 			multipart.addBodyPart(messageBodyPart);
+
+			messageBodyPart = new MimeBodyPart();
+
+			//Add files to send
+			String filesToSend = emailProperties.getFilesToSend();
+			System.out.println("Files to send: " + filesToSend);
+			if (filesToSend != null && filesToSend.length() > 0)
+			{
+				for (String name : emailProperties.getFilesToSend().split(","))
+				{
+					DataSource source = new FileDataSource(name);
+					messageBodyPart.setDataHandler(new DataHandler(source));
+					messageBodyPart.setFileName(name);
+					multipart.addBodyPart(messageBodyPart);
+				}
+			}
+
+			message.setContent(multipart);
 
 			Transport.send(message);
 			System.out.println("message sent");

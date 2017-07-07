@@ -6,16 +6,20 @@ public class EmailProperties
 	private String recipients;
 	private String sender;
 	private String emailAuthFileName;
-	private String body;// this will likely be replaced in a further development
+	private String body;
 	private String subject;
+	private String fileName;
+	private String filesToSend;
 
-	public EmailProperties(String recipients, String sender, String emailAuthFileName, String body, String subject)
+	public EmailProperties(String recipients, String sender, String emailAuthFileName, String body, String subject,
+			String filesToSend)
 	{
 		this.recipients = recipients;
 		this.sender = sender;
 		this.emailAuthFileName = emailAuthFileName;
 		this.body = body;
 		this.subject = subject;
+		this.setFilesToSend(filesToSend);
 	}
 
 	public String getRecipients()
@@ -66,5 +70,15 @@ public class EmailProperties
 	public void setSubject(String subject)
 	{
 		this.subject = subject;
+	}
+
+	public String getFilesToSend()
+	{
+		return filesToSend;
+	}
+
+	public void setFilesToSend(String filesToSend)
+	{
+		this.filesToSend = filesToSend;
 	}
 }
