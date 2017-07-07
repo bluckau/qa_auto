@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite1">
+<suite verbose="10" name="Suite2">
 	<test name="TestChallenge1">
     	<parameter name="fileName" value="src/test/resources/menus.xls"/>
     	<parameter name="columnsToRead" value="2"/>

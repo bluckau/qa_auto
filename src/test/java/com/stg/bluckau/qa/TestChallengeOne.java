@@ -93,17 +93,6 @@ public class TestChallengeOne
 		columnsToRead = Integer.parseInt(columns);
 	}
 
-	/**
-	 *
-	 * @param recipient
-	 */
-	@Parameters({ "email" })
-	@AfterTest
-	public void afterTest(@Optional("brian.luckau@stgconsulting.com") String recipient)
-	{
-		// System.err.println("Finished Running Test " + testNumber);
-	}
-
 
 	@BeforeClass
 	public static void beforeClass()
@@ -112,6 +101,7 @@ public class TestChallengeOne
 		mainPage = new MainPage();
 	}
 
+
 	@AfterClass
 	public static void afterClass()
 	{
@@ -119,6 +109,7 @@ public class TestChallengeOne
 		Automation.quit();
 		Automation.driver = null;
 	}
+
 	/**
 	 *
 	 * @param recipients

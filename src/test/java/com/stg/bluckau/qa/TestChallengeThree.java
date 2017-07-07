@@ -4,8 +4,13 @@ import static org.testng.Assert.assertEquals;
 
 import java.io.File;
 
+import org.testng.ITestContext;
+import org.testng.Reporter;
+import org.testng.TestRunner;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
@@ -17,7 +22,8 @@ public class TestChallengeThree
 	private static MainPage mainPage;
 	private static String dataFileName;
 	private static int columnsToRead;
-
+	private String testingLogLevel;
+	private ITestContext context;
 	// ----THIS IS THE DATA PROVIDER----
 	@DataProvider(name = "webData")
 	public static Object[][] webData()
@@ -41,6 +47,20 @@ public class TestChallengeThree
 		return theArray;
 	}
 
+	/**
+	 *
+	 * @param context
+	 *            the ItestContext object (which is automatically passed by
+	 *            TestNG)
+	 */
+	@BeforeSuite
+	public void processItestContext(ITestContext context)
+	{
+		this.context = context;
+		System.out.println("Before Suite");
+		System.out.println("Running XML Suite -- " + context.getSuite().getName());
+	}
+
 	@Parameters({ "fileName", "columnsToRead" })
 	@BeforeTest
 	public void before(@Optional("submenus.xls") String name, @Optional("3") String columns)
@@ -52,6 +72,7 @@ public class TestChallengeThree
 		System.out.println("fileName = " + dataFileName);
 		System.out.println("Columns " + columnsToRead);
 	}
+
 	@BeforeClass
 	public static void beforeClass()
 	{
@@ -63,6 +84,18 @@ public class TestChallengeThree
 	{
 		Automation.quit();
 		Automation.driver = null;
+	}
+
+	@AfterSuite
+	@Parameters({ "email" })
+	public void sendMailAfterSuite(@Optional("brian.luckau@stgconsulting.com") String recipients)
+	{
+		// RealTimeListener rl = new RealTimeListener();
+		// System.out.println("rl dot toSTring" + rl.);
+		System.out.println("After suite " + context.getSuite().getName());
+
+		EmailHelpers eh = new EmailHelpers();
+		eh.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
 	}
 
 	@Test(dataProvider = "webData")

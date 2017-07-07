@@ -2,9 +2,12 @@ package com.stg.bluckau.qa;
 
 import static org.testng.Assert.assertEquals;
 
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
@@ -14,10 +17,11 @@ import org.testng.annotations.Test;
 
 public class TestChallengeTwo
 {
-	private static int testNumber;
 	private static MainPage mainPage;
 	private static String dataFileName;
 	private static String columnsToRead;
+	private String testingLogLevel;
+	private ITestContext context;
 
 	@DataProvider(name = "webData")
 	public static Object[][] webData()
@@ -25,16 +29,39 @@ public class TestChallengeTwo
 		System.out.println("**** get web data ****");
 		System.out.println("File name: " + dataFileName + ";");
 		Object[][] arrayObject = TestHelpers.getWebData(dataFileName, Integer.parseInt(columnsToRead));
-
-		System.out.println(arrayObject.length);
-		System.out.println(arrayObject[0].length);
 		return arrayObject;
 	}
 
+	/**
+	 *
+	 * @param context
+	 *            the ItestContext object (which is automatically passed by
+	 *            TestNG)
+	 */
+	@BeforeSuite
+	public void processItestContext(ITestContext context)
+	{
+		this.context = context;
+		System.out.println("Before Suite");
+		System.out.println("Running XML Suite -- " + context.getSuite().getName());
+	}
 
+	/**
+	 *
+	 * @param testingLogLevel
+	 *            Testing log level currently 1 through 10. passed automatically
+	 *            by testng from the xml parameter.
+	 */
+	@BeforeSuite
+	@Parameters({ "testingLogLevel" })
+	public void setLogLevel(@Optional("3") String testingLogLevel)
+	{
+		this.testingLogLevel = testingLogLevel;
+		System.out.println("Log level = " + this.testingLogLevel);
+	}
 	@Parameters({ "fileName", "columnsToRead" })
 	@BeforeTest
-	public void before(@Optional("menus.xls") String fileName, @Optional("2") String columns)
+	public void before(@Optional("src/test/resources/menus.xls") String fileName, @Optional("2") String columns)
 	{
 		System.out.println("Before Test");
 		System.out.println("fileName = " + fileName);
@@ -62,8 +89,19 @@ public class TestChallengeTwo
 		Automation.driver = null;
 	}
 
+	@AfterSuite
+	@Parameters({ "email" })
+	public void sendMailAfterSuite(@Optional("brian.luckau@stgconsulting.com") String recipients)
+	{
+		// RealTimeListener rl = new RealTimeListener();
+		// System.out.println("rl dot toSTring" + rl.);
+		System.out.println("After suite " + context.getSuite().getName());
+
+		EmailHelpers eh = new EmailHelpers();
+		eh.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
+	}
+
 	@Test(dataProvider = "webData")
-	// TODO: stop having to take extra strings
 	public void testNav1(String menuOption, String validationString)
 	{
 		// System.err.println("Testing menu: " + menuOption);
