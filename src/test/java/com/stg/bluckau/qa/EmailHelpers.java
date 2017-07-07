@@ -21,7 +21,7 @@ public class EmailHelpers
 		}
 		if (loglevel > 1)
 		{
-			filesToSend = "test-output/emailable-report.html";
+			filesToSend = "test-output/target/surefire-reports/emailable-report.html";
 		}
 
 		EmailProperties emailProperties = new EmailProperties(addresses, from, "src/test/resources/mail.properties",
