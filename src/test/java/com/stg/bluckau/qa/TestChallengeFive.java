@@ -1,14 +1,11 @@
 package com.stg.bluckau.qa;
 
-import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -20,7 +17,7 @@ import org.testng.annotations.Test;
 
 public class TestChallengeFive
 {
-	private static WebDriver driver;
+	// private static WebDriver driver;
 	private static SearchPage searchPage;
 	private static int testNumber = 0;
 	By resortsList = By.cssSelector("div.ListingFilter-column.ListingFilter-column--categories");
@@ -52,7 +49,6 @@ public class TestChallengeFive
 	@BeforeClass
 	public static void beforeClass()
 	{
-		driver = Automation.getDriver();
 		searchPage = new SearchPage();
 		searchPage.pageLoad();
 	}
@@ -86,7 +82,6 @@ public class TestChallengeFive
 	// @Test(dataProvider = "webData")
 	public void testSearch2(String resort, String menu, String subMenu)
 	{
-
 		/*
 		 * Basic search for one combination. May need to pull the results
 		 * comparison out because these result sets change constantly. You would
@@ -102,6 +97,5 @@ public class TestChallengeFive
 		assertEquals("Uber", results.get(0));
 
 	}
-	//	}
 }
 

@@ -5,8 +5,6 @@ import static org.testng.Assert.assertEquals;
 import java.io.File;
 
 import org.testng.ITestContext;
-import org.testng.Reporter;
-import org.testng.TestRunner;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
@@ -90,12 +88,10 @@ public class TestChallengeThree
 	@Parameters({ "email" })
 	public void sendMailAfterSuite(@Optional("brian.luckau@stgconsulting.com") String recipients)
 	{
-		// RealTimeListener rl = new RealTimeListener();
-		// System.out.println("rl dot toSTring" + rl.);
 		System.out.println("After suite " + context.getSuite().getName());
 
-		EmailHelpers eh = new EmailHelpers();
-		eh.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
+		EmailHelper emailHelper = new EmailHelper(context);
+		emailHelper.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
 	}
 
 	@Test(dataProvider = "webData")

@@ -9,10 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+//import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class SearchPage 
+public class SearchPage
 {
 	private static final String URL = "https://www.skiutah.com/members/listing";
 	private static final By listingResults = By.xpath("//div[@class='ListingResults-item']//*/h3/a");
@@ -23,7 +23,7 @@ public class SearchPage
 	private static final By resultsList = By.cssSelector(".ListingResults-items .u-cf");
 
 	private static WebDriver driver;
-	private static WebDriverWait wait;
+	// private static WebDriverWait wait;
 
 	public SearchPage()
 	{
@@ -84,7 +84,7 @@ public class SearchPage
 	public List<String> getSearchResults()
 	{
 		List<String> results = new ArrayList<String>();
-		
+
 		WebElement searchElement = driver.findElement(resultsList);
 		// Find subelements that are search results
 		List<WebElement> listingItemsElements = searchElement

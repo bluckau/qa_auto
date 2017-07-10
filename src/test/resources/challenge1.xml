@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!-- verbose=<1 through 10>. This is the verbosity for testng in general. -->
 <suite verbose="3" name="Suite1">
 	<test name="TestChallenge1">
     	<parameter name="fileName" value="src/test/resources/url_verification.xls"/>
     	<parameter name="columnsToRead" value="2"/>
     	<parameter name="email" value = "brian.luckau@stgconsulting.com"/>
-    	<parameter name="testingLogLevel" value = "3"/>
+    	<parameter name="testingLogLevel" value = "DEBUG"/>
+    	<parameter name="emailLogLevel" value = "DEBUG"/>
     	<classes>
 	        <class name="com.stg.bluckau.qa.TestChallengeOne"/>
 	    </classes>

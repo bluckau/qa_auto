@@ -5,16 +5,13 @@ import static org.junit.Assert.assertEquals;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.reporters.*;
 
 
 @Listeners(RealTimeListener.class)
@@ -70,7 +67,7 @@ public class TestChallengeOne
 	 */
 	@BeforeSuite
 	@Parameters({ "testingLogLevel" })
-	public void setLogLevel(@Optional("3") String testingLogLevel)
+	public void setLogLevel(@Optional("WARN") String testingLogLevel)
 	{
 		this.testingLogLevel = testingLogLevel;
 		System.out.println("Log level = " + this.testingLogLevel);
@@ -123,8 +120,8 @@ public class TestChallengeOne
 		// System.out.println("rl dot toSTring" + rl.);
 		System.out.println("After suite " + context.getSuite().getName());
 
-		EmailHelpers eh = new EmailHelpers();
-		eh.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
+		EmailHelper emailHelper = new EmailHelper(context);
+		emailHelper.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
 	}
 
 	/**

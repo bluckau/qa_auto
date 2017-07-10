@@ -97,8 +97,8 @@ public class TestChallengeTwo
 		// System.out.println("rl dot toSTring" + rl.);
 		System.out.println("After suite " + context.getSuite().getName());
 
-		EmailHelpers eh = new EmailHelpers();
-		eh.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
+		EmailHelper emailHelper = new EmailHelper(context);
+		emailHelper.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
 	}
 
 	@Test(dataProvider = "webData")
