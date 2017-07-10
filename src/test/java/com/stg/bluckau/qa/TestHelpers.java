@@ -44,8 +44,8 @@ public class TestHelpers
 
 	public static Object[][] getWebData(String fileName, int columns)
 	{
-		System.err.println("****getWebData");
-		System.err.println("file name: " + fileName);
+		// System.err.println("****getWebData");
+		// System.err.println("file name: " + fileName);
 		if (new File(fileName).exists())
 		{
 			// System.out.println("file exists");
@@ -146,10 +146,8 @@ public class TestHelpers
 						list.add(cellData);
 					}
 				}
-				// }
-
 			}
-			// System.out.println("Close workbook");
+
 			workBook.close();
 			System.exit(1);
 		} catch (IOException e)

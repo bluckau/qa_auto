@@ -28,11 +28,17 @@ public class TestLogger
 	/**
 	 *
 	 */
-	public TestLogger(ITestContext context)
+	public TestLogger(LogLevel logLevel, LogLevel emailLogLevel)
 	{
-		consoleLogLevel = (LogLevel) (context.getAttribute("logLevel"));
 		driver = Automation.getDriver();
+		this.consoleLogLevel = logLevel;
+		this.emailLogLevel = emailLogLevel;
+	}
 
+	public TestLogger(String logLevelString, String emailLogLevelString)
+	{
+		this.consoleLogLevel = LogLevel.valueOf(logLevelString);
+		this.emailLogLevel = LogLevel.valueOf(emailLogLevelString);
 	}
 
 	public void log(LogLevel requestedLevel, String text)
@@ -56,16 +62,26 @@ public class TestLogger
 
 	public static void takeScreenShot(String fileName)
 	{
+		driver = Automation.getDriver();
+		if (driver == null)
+			System.out.println("DRIVER IS NULL");
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		String fullFileName = "";
+		String relativeName = "";
 		try
 		{
 			File dir = new File("test-output\\Screenshots");
 			dir.mkdir();
-			FileUtils.copyFile(scrFile, new File("test-output\\screenshots\\" + fileName));
+			relativeName = "test-output\\screenshots\\" + fileName;
+			String current = new java.io.File(".").getCanonicalPath();
+			System.out.println("Current dir:" + current);
+			fullFileName = "current" + relativeName;
+			FileUtils.copyFile(scrFile, new File(relativeName));
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Reporter.log("<img src=\"" + fullFileName + " alt=\"Alt Text\"/>");
 	}
 }

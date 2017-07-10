@@ -29,9 +29,10 @@ public class TestChallengeOne
 	private static int columnsToRead;
 	// TOOD: Make this more dynamic so we dont
 	// have to specify columns to read
-
-	private String testingLogLevel;
+	private String logLevel;
+	private String emailLogLevel;
 	private ITestContext context;
+
 
 	/**
 	 *
@@ -55,22 +56,26 @@ public class TestChallengeOne
 	public void processItestContext(ITestContext context)
 	{
 		this.context = context;
-		System.out.println("Before Suite");
 		System.out.println("Running XML Suite -- " + context.getSuite().getName());
 	}
 
 	/**
 	 *
-	 * @param testingLogLevel
+	 * @param logLevel
 	 *            Testing log level currently 1 through 10. passed automatically
 	 *            by testng from the xml parameter.
 	 */
-	@BeforeSuite
-	@Parameters({ "testingLogLevel" })
-	public void setLogLevel(@Optional("WARN") String testingLogLevel)
+	@BeforeClass
+	@Parameters({ "logLevel", "emailLogLevel" })
+	public void setLogLevels(@Optional("WARN") String logLevel, @Optional("ERROR") String emailLogLevel)
 	{
-		this.testingLogLevel = testingLogLevel;
-		System.out.println("Log level = " + this.testingLogLevel);
+		System.out.println("SETTING LOG LEVELS");
+		System.out.println("email Log Level = " + emailLogLevel);
+		System.out.println("Log Level = " + logLevel);
+		this.emailLogLevel = logLevel;
+		this.logLevel = logLevel;
+		context.setAttribute("logLevel", logLevel);
+		context.setAttribute("emailLogLevel", logLevel);
 	}
 
 	/**
@@ -82,7 +87,7 @@ public class TestChallengeOne
 	 */
 	@Parameters({ "fileName", "columns" })
 	@BeforeClass
-	public void before(@Optional("url_verification.xls") String fileName, @Optional("2") String columns)
+	public void setDataFile(@Optional("url_verification.xls") String fileName, @Optional("2") String columns)
 	{
 		System.out.println("Class Test");
 		System.out.println("data file name to read is " + fileName);
@@ -102,7 +107,6 @@ public class TestChallengeOne
 	@AfterClass
 	public static void afterClass()
 	{
-
 		Automation.quit();
 		Automation.driver = null;
 	}
@@ -112,16 +116,14 @@ public class TestChallengeOne
 	 * @param recipients
 	 *            The recipients list for email, passed by testng
 	 */
-	@AfterSuite
+	@AfterClass
 	@Parameters({ "email" })
-	public void sendMailAfterSuite(@Optional("brian.luckau@stgconsulting.com") String recipients)
+	public void sendMailAfterSuite(@Optional("brian.luckau@stgconsulting.com") String email)
 	{
-		// RealTimeListener rl = new RealTimeListener();
-		// System.out.println("rl dot toSTring" + rl.);
 		System.out.println("After suite " + context.getSuite().getName());
 
 		EmailHelper emailHelper = new EmailHelper(context);
-		emailHelper.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
+		emailHelper.sendTestResults(email, "brian.luckau@stgconsulting.com", context);
 	}
 
 	/**
@@ -140,5 +142,4 @@ public class TestChallengeOne
 		if (verificationText != null)
 			assertEquals(title, verificationText);
 	}
-
 }

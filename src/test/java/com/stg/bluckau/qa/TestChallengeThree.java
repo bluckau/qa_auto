@@ -20,7 +20,7 @@ public class TestChallengeThree
 	private static MainPage mainPage;
 	private static String dataFileName;
 	private static int columnsToRead;
-	private String testingLogLevel;
+	private String logLevel;
 	private ITestContext context;
 	// ----THIS IS THE DATA PROVIDER----
 	@DataProvider(name = "webData")

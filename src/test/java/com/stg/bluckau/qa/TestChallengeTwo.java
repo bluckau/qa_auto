@@ -20,7 +20,7 @@ public class TestChallengeTwo
 	private static MainPage mainPage;
 	private static String dataFileName;
 	private static String columnsToRead;
-	private String testingLogLevel;
+	private String logLevel;
 	private ITestContext context;
 
 	@DataProvider(name = "webData")
@@ -93,8 +93,6 @@ public class TestChallengeTwo
 	@Parameters({ "email" })
 	public void sendMailAfterSuite(@Optional("brian.luckau@stgconsulting.com") String recipients)
 	{
-		// RealTimeListener rl = new RealTimeListener();
-		// System.out.println("rl dot toSTring" + rl.);
 		System.out.println("After suite " + context.getSuite().getName());
 
 		EmailHelper emailHelper = new EmailHelper(context);

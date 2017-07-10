@@ -1,7 +1,6 @@
 package com.stg.bluckau.qa;
 
 
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -12,65 +11,102 @@ import com.stg.bluckau.qa.LogLevel;
 /**
  * @author Brian Luckau
  *
+ *         TODO: would like to use log levels for these System.out.println
  */
 public class RealTimeListener implements ITestListener
 {
-
-	@SuppressWarnings("unused")
 	private ITestContext context;
-	private TestLogger testLogger;
-	private LogLevel logLevel;
 
-	RealTimeListener(ITestContext context, WebDriver driver, TestLogger testLogger)
-	{
+	@Override
+	public void onStart(ITestContext context) {
 		this.context = context;
-		this.testLogger = testLogger;
-		this.logLevel = (LogLevel) context.getAttribute("logLevel");
+		System.out.println("Testing Log Level:" + context.getAttribute("logLevel"));
+		System.out.println("TESTNG Verbosity: " + TestRunner.getVerbose());
+		System.out.println("Start Of Execution(TEST)->" + context.getName());
 	}
 
 	@Override
-	public void onStart(ITestContext arg0) {
-		testLogger.log(LogLevel.OFF, "Testing Log Level:" + logLevel);
-		testLogger.log(LogLevel.INFO, "TESTNG Verbosity: " + TestRunner.getVerbose());
-		testLogger.log(LogLevel.INFO, "Start Of Execution(TEST)->" + arg0.getName());
+	public void onTestStart(ITestResult result)
+	{
+		System.out.println("Test Started->" + context.getName());
 	}
 
 	@Override
-	public void onTestStart(ITestResult arg0) {
-		testLogger.log(LogLevel.INFO, "Test Started->" + arg0.getName());
-	}
+	public void onTestSuccess(ITestResult result)
+	{
+		System.out.println("Test Suceeded->" + context.getName());
 
-	@Override
-	public void onTestSuccess(ITestResult arg0) {
-		testLogger.log(LogLevel.INFO, "Test Suceeded->" + arg0.getName());
-		if (this.logLevel.getValue() >= LogLevel.INFO.getValue())
+		LogLevel l;
+		System.out.println("attributes:" + context.getAttributeNames().toString());
+		// System.out.println("Test Failed->" + context.getName())
+		System.out.println("attribute says:" + context.getAttribute("logLevel"));
+		String logLevelString;
+
+		Object logAttribute = context.getAttribute("logLevel");
+		if (logAttribute != null)
 		{
-			TestLogger.takeScreenShot("success" + arg0.getName() + ".jpg");
+			logLevelString = logAttribute.toString();
+		} else
+		{
+			// TODO: remove this and make sure things still work
+			logLevelString = "DEBUG";
+		}
+
+		l = LogLevel.valueOf(logLevelString);
+
+		// System.out.println("Log Level L is of value " + l.getValue());
+
+		if (l.getValue() >= LogLevel.INFO.getValue())
+		{
+			TestLogger.takeScreenShot("success" + context.getName() + ".jpg");
 		}
 	}
 
 	@Override
-	public void onTestFailure(ITestResult arg0) {
-		testLogger.log(LogLevel.INFO, "Test Failed->" + arg0.getName());
-		if (this.logLevel.getValue() >= LogLevel.ERROR.getValue())
+	public void onTestFailure(ITestResult context)
+	{
+		LogLevel l;
+		//System.out.println("attributes:" + context.getAttributeNames().toString());
+		System.out.println("Test Failed->" + context.getName());
+		//System.out.println("attribute says:" + context.getAttribute("logLevel"));
+		String logLevelString;
+
+		Object logAttribute = context.getAttribute("logLevel");
+		if (logAttribute != null)
 		{
-			TestLogger.takeScreenShot("failure" + arg0.getName() + ".jpg");
+
+			logLevelString = logAttribute.toString();
+		} else
+		{
+			//TODO: remove this and make sure things still work
+			logLevelString = "DEBUG";
+		}
+
+		l = LogLevel.valueOf(logLevelString);
+
+		//System.out.println("Log Level L is of value " + l.getValue());
+		if (l.getValue() >= LogLevel.ERROR.getValue())
+		{
+			TestLogger.takeScreenShot("failure" + context.getName() + ".jpg");
 		}
 	}
 
 
 	@Override
-	public void onTestSkipped(ITestResult arg0) {
-		testLogger.log(LogLevel.INFO, "Test Skipped->" + arg0.getName());
+	public void onTestSkipped(ITestResult context)
+	{
+		System.out.println("Test Skipped->" + context.getName());
 	}
 
 	@Override
-	public void onFinish(ITestContext arg0) {
-		testLogger.log(LogLevel.INFO, "END Of Execution(TEST)->" + arg0.getName());
+	public void onFinish(ITestContext context)
+	{
+		System.out.println("END Of Execution(TEST)->" + context.getName());
 	}
 
 	@Override
-	public void onTestFailedButWithinSuccessPercentage(ITestResult arg0) {
+	public void onTestFailedButWithinSuccessPercentage(ITestResult context)
+	{
 		// Do we need?
 	}
 

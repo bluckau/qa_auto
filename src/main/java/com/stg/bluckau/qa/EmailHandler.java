@@ -21,11 +21,13 @@ public class EmailHandler
 	private String smtpPort;
 	private String useAuth;
 	private EmailProperties emailProperties;
+	private TestLogger logger;
 
 	public EmailHandler(EmailProperties emailProperties)
 	{
 		this.emailProperties = emailProperties;
 		loadEmailAuth(emailProperties.getEmailAuthFileName());
+		logger = new TestLogger("DEBUG", "DEBUG");
 	}
 
 
@@ -67,9 +69,9 @@ public class EmailHandler
 		Properties sessionProperties = System.getProperties();
 
 		// create the properties to send to the mime message
-		System.err.println("smtpServer = " + smtpServer);
-		System.err.println("useAuthentication = " + useAuth);
-		// System.err.println("Password: " + password);
+		logger.log(LogLevel.INFO, "smtpServer = " + smtpServer);
+		logger.log(LogLevel.INFO, "useAuthentication = " + useAuth);
+
 		System.out.println("userName: " + userName);
 		sessionProperties.setProperty("mail.smtp.host", smtpServer);
 		sessionProperties.put("mail.smtp.port", smtpPort);
