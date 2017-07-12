@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite1">
+<!-- verbose=<1 through 10>. This is the verbosity for testng in general. -->
+<suite verbose="1" name="Suite8">
+	<listeners>
+		<listener class-name="com.stg.bluckau.qa.RealTimeListener"></listener>
+	</listeners>
 	<test name="TestChallenge8">
-    	<parameter name="fileName" value = "src/test/resources/menuurls.xls"/>
-    	<parameter name="columnsToRead" value = "2"/>
-    	<parameter name="email" value = "brian.luckau@stg.com,bluckau@luckau.us"/>
+    	<parameter name="fileName" value="src/test/resources/menuurls.xls"/>
+    	<parameter name="columnsToRead" value="2"/>
+    	<parameter name="email" value="brian.luckau@stgconsulting.com"/>
+    	<parameter name="emailLogLevel" value="DEBUG"/>
+    	<parameter name="fileLogLevell" value="TRACE"/>
+    	<parameter name="consoleLogLevel" value="DEBUG"/>
     	<classes>
 	        <class name="com.stg.bluckau.qa.TestChallengeEight"/>
 	    </classes>
-	</test>add
+	</test>
 </suite>

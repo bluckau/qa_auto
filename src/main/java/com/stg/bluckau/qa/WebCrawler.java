@@ -12,7 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.validator.routines.UrlValidator;
+import org.apache.commons.validator.UrlValidator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

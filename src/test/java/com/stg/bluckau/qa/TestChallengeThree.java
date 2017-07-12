@@ -91,7 +91,7 @@ public class TestChallengeThree
 		System.out.println("After suite " + context.getSuite().getName());
 
 		EmailHelper emailHelper = new EmailHelper(context);
-		emailHelper.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
+		emailHelper.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context);
 	}
 
 	@Test(dataProvider = "webData")

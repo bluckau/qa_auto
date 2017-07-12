@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite1">
+<suite verbose="1" name="Suite7">
+	<listeners>
+		<listener class-name="com.stg.bluckau.qa.RealTimeListener"></listener>
+	</listeners>
 	<test name="TestChallenge7">
     	<parameter name="fileName" value = "src/test/resources/menus.xls"/>
-    	<parameter name="columnsToRead" value = "1"/>
-    	<parameter name="email" value = "brian.luckau@stg.com,bluckau@luckau.us"/>
+    	<parameter name="columnsToRead" value="1"/>
+    	<parameter name="email" value="brian.luckau@stgconsulting.com"/>
+    	<parameter name="emailLogLevel" value="DEBUG"/>
+    	<parameter name="fileLogLevell" value="TRACE"/>
+    	<parameter name="consoleLogLevel" value="DEBUG"/>
     	<classes>
 	        <class name="com.stg.bluckau.qa.TestChallengeSeven"/>
 	    </classes>

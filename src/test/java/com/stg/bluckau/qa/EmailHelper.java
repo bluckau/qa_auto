@@ -2,36 +2,25 @@ package com.stg.bluckau.qa;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.ISuite;
 import org.testng.ITestContext;
 
 public class EmailHelper
 {
-	private TestLogger logger;
+	private Logger logger = LogManager.getLogger("testLogger");
 
 	private static final String EMAIL_REPORT_JENKINS = "test-output/target/surefire-reports/emailable-report.html";
 	private static final String EMAIL_REPORT_NONJENKINS = "test-output/emailable-report.html";
 
 	public EmailHelper(ITestContext context)
 	{
-		LogLevel l;
-		System.out.println("attributes:" + context.getAttributeNames().toString());
-		// System.out.println("Test Failed->" + context.getName())
-		System.out.println("attribute says:" + context.getAttribute("logLevel"));
-		String logLevelString;
-
-		Object logAttribute = context.getAttribute("logLevel");
-		if (logAttribute != null)
-		{
-
-			logLevelString = logAttribute.toString();
-		} else
-		{
-			logLevelString = "DEBUG";
-		}
-		//logger = new TestLogger(LogLevel.valueOf(logLevelString));
-		logger = new TestLogger(LogLevel.valueOf("DEBUG"), LogLevel.valueOf("DEBUG"));
+		logger.debug("attributes:" + context.getAttributeNames().toString());
+		logger.error("Test Failed->" + context.getName());
+		logger.debug("attribute says:" + context.getAttribute("logLevel"));
 	}
 
 	public void sendTestResults(String addresses, String from, ITestContext context)
@@ -48,7 +37,7 @@ public class EmailHelper
 		System.out.println("Current dir:" + current);
 		String currentDir = System.getProperty("user.dir");
 		System.out.println("Current dir using System:" + currentDir);
-		logger.log(LogLevel.TRACE, "running sendTestResults");
+		logger.trace("running sendTestResults");
 		//The suite from the context
 		ISuite suite = context.getSuite();
 		String bodyText = "";
@@ -64,7 +53,18 @@ public class EmailHelper
 			emailFilePath = EMAIL_REPORT_NONJENKINS;
 		}
 
-		filesToSend += emailFilePath;
+		String attachments = context.getAttribute("attachments").toString();
+		filesToSend = emailFilePath;
+		if (attachments == null || "".equals(attachments))
+		{
+			logger.debug("no attachments found for email");
+		}
+		else
+		{
+			filesToSend = filesToSend + "," + attachments;
+		}
+
+
 		// TODO: add the screen shots or get them to a universally accessible
 		// path
 		EmailProperties emailProperties = new EmailProperties(addresses, from, "src/test/resources/mail.properties",

@@ -17,7 +17,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 public class Automation {
 	static WebDriver driver;
 	static WebDriverWait wait;
-	static TestLogger logger;
+
 
 	static final long WAIT_TIMEOUT = 20;
 	public static WebDriver getDriver()

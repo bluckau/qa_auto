@@ -46,19 +46,19 @@ public class TestChallengeTwo
 		System.out.println("Running XML Suite -- " + context.getSuite().getName());
 	}
 
-	/**
+	/*
+	 * /**
 	 *
-	 * @param testingLogLevel
-	 *            Testing log level currently 1 through 10. passed automatically
-	 *            by testng from the xml parameter.
+	 * @param testingLogLevel Testing log level currently 1 through 10. passed
+	 * automatically by testng from the xml parameter.
+	 *
+	 * @BeforeSuite
+	 *
+	 * @Parameters({ "testingLogLevel" }) public void setLogLevel(@Optional("3")
+	 * String testingLogLevel) { this.testingLogLevel = testingLogLevel;
+	 * System.out.println("Log level = " + this.testingLogLevel); }
+	 *
 	 */
-	@BeforeSuite
-	@Parameters({ "testingLogLevel" })
-	public void setLogLevel(@Optional("3") String testingLogLevel)
-	{
-		this.testingLogLevel = testingLogLevel;
-		System.out.println("Log level = " + this.testingLogLevel);
-	}
 	@Parameters({ "fileName", "columnsToRead" })
 	@BeforeTest
 	public void before(@Optional("src/test/resources/menus.xls") String fileName, @Optional("2") String columns)
@@ -96,7 +96,7 @@ public class TestChallengeTwo
 		System.out.println("After suite " + context.getSuite().getName());
 
 		EmailHelper emailHelper = new EmailHelper(context);
-		emailHelper.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context, testingLogLevel);
+		emailHelper.sendTestResults(recipients, "brian.luckau@stgconsulting.com", context);
 	}
 
 	@Test(dataProvider = "webData")

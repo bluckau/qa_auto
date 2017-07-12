@@ -2,15 +2,15 @@ package com.stg.bluckau.qa;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-//import java.net.InetAddress;
 import java.util.Properties;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
-//import javax.activation.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EmailHandler
 {
@@ -21,16 +21,13 @@ public class EmailHandler
 	private String smtpPort;
 	private String useAuth;
 	private EmailProperties emailProperties;
-	private TestLogger logger;
 
+	private Logger logger = LogManager.getLogger("testLogger");
 	public EmailHandler(EmailProperties emailProperties)
 	{
 		this.emailProperties = emailProperties;
 		loadEmailAuth(emailProperties.getEmailAuthFileName());
-		logger = new TestLogger("DEBUG", "DEBUG");
 	}
-
-
 	public void loadEmailAuth(String fileName)
 	{
 		Properties props = new Properties();
@@ -69,8 +66,8 @@ public class EmailHandler
 		Properties sessionProperties = System.getProperties();
 
 		// create the properties to send to the mime message
-		logger.log(LogLevel.INFO, "smtpServer = " + smtpServer);
-		logger.log(LogLevel.INFO, "useAuthentication = " + useAuth);
+		logger.info( "smtpServer = " + smtpServer);
+		logger.info( "useAuthentication = " + useAuth);
 
 		System.out.println("userName: " + userName);
 		sessionProperties.setProperty("mail.smtp.host", smtpServer);

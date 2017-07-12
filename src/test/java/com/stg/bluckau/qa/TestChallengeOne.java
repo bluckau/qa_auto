@@ -2,6 +2,7 @@ package com.stg.bluckau.qa;
 
 import static org.junit.Assert.assertEquals;
 
+import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
@@ -12,6 +13,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 
 
 @Listeners(RealTimeListener.class)
@@ -29,10 +31,10 @@ public class TestChallengeOne
 	private static int columnsToRead;
 	// TOOD: Make this more dynamic so we dont
 	// have to specify columns to read
-	private String logLevel;
-	private String emailLogLevel;
-	private ITestContext context;
 
+	private ITestContext context;
+	private static TestLogUtil testLogUtil;
+	private static Logger logger;
 
 	/**
 	 *
@@ -41,7 +43,8 @@ public class TestChallengeOne
 	@DataProvider(name = "webData")
 	public static Object[][] webData()
 	{
-		System.out.println("**** get web data ****");
+		logger.debug("get web data");
+
 		Object[][] arrayObject = TestHelpers.getWebData(dataFileName, columnsToRead);
 		return arrayObject;
 	}
@@ -53,10 +56,10 @@ public class TestChallengeOne
 	 *            TestNG)
 	 */
 	@BeforeSuite
-	public void processItestContext(ITestContext context)
+	public void setUpItestContext(ITestContext context)
 	{
 		this.context = context;
-		System.out.println("Running XML Suite -- " + context.getSuite().getName());
+		testLogUtil = new TestLogUtil(context);
 	}
 
 	/**
@@ -65,17 +68,17 @@ public class TestChallengeOne
 	 *            Testing log level currently 1 through 10. passed automatically
 	 *            by testng from the xml parameter.
 	 */
-	@BeforeClass
-	@Parameters({ "logLevel", "emailLogLevel" })
-	public void setLogLevels(@Optional("WARN") String logLevel, @Optional("ERROR") String emailLogLevel)
+	@BeforeSuite
+	@Parameters({ "consoleLogLevel", "emailLogLevel", "fileLogLevel" })
+	public void setUp(ITestContext context, @Optional("DEBUG") String consoleLogLevel,
+			@Optional("ERROR") String emailLogLevel, @Optional("TRACE") String fileLogLevel)
 	{
-		System.out.println("SETTING LOG LEVELS");
-		System.out.println("email Log Level = " + emailLogLevel);
-		System.out.println("Log Level = " + logLevel);
-		this.emailLogLevel = logLevel;
-		this.logLevel = logLevel;
-		context.setAttribute("logLevel", logLevel);
-		context.setAttribute("emailLogLevel", logLevel);
+
+		context.setAttribute("fileLogLevel", fileLogLevel);
+		context.setAttribute("emailLogLevel", emailLogLevel);
+		context.setAttribute("consoleLogLevel", consoleLogLevel);
+		testLogUtil = new TestLogUtil(context);
+		logger = testLogUtil.getLogger();// get the logger with the right log
 	}
 
 	/**
@@ -87,7 +90,8 @@ public class TestChallengeOne
 	 */
 	@Parameters({ "fileName", "columns" })
 	@BeforeClass
-	public void setDataFile(@Optional("url_verification.xls") String fileName, @Optional("2") String columns)
+	public void setDataFile(@Optional("src/test/resources/url_verification.xls") String fileName,
+			@Optional("2") String columns)
 	{
 		System.out.println("Class Test");
 		System.out.println("data file name to read is " + fileName);

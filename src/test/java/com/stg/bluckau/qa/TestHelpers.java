@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -14,20 +16,33 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.DataFormatter;
 
+
+/**
+ * @author Brian Luckau
+ *
+ */
 public class TestHelpers
 {
+	private static Logger logger = LogManager.getLogger("testLogger");
 
-
+	/*
+	 * printArray prints the contents of an array. It is mainly for debugging
+	 * the test framework
+	 *
+	 * @param array the 2d array to print
+	 *
+	 * @param columns How many columns we are using in this array
+	 */
 	public static void printArray(Object[][] array, int columns)
 	{
+		logger.trace("starting printArray");
 		int rows = array.length;
-
 		for (int i = 0; i < rows; i++)
 		{
-			// System.out.print("processing row " + i);
+			logger.trace("processing row " + i);
 			for (int j = 0; j < columns; j++)
 			{
-				// System.out.print("processing column " + j);
+				logger.trace("processing column " + j);
 				Object temp = array[i][j];
 				if (temp != null)
 				{
@@ -42,6 +57,14 @@ public class TestHelpers
 		}
 	}
 
+
+	/**
+	 * @param fileName
+	 *            The xls file name to process
+	 * @param columns
+	 *            How many columns are we using in this spreadsheet
+	 * @return a 2d array representing the data.
+	 */
 	public static Object[][] getWebData(String fileName, int columns)
 	{
 		// System.err.println("****getWebData");
@@ -103,11 +126,20 @@ public class TestHelpers
 			e.printStackTrace();
 		}
 
-		// printArray(theArray, columns);
-
+		if (logger.isDebugEnabled())
+		{
+			printArray(theArray, columns);
+		}
 		return theArray;
 	}
 
+
+	/**
+	 * Gets the list of resorts from a spreadsheet
+	 *
+	 * @param resortsFileName
+	 * @return a List of strings; the list of resorts
+	 */
 	public static List<String> getResorts(String resortsFileName)
 	{
 		List<String> list = new ArrayList<String>();
@@ -125,8 +157,7 @@ public class TestHelpers
 			String cellData = "";
 			rows = sheet.getPhysicalNumberOfRows();
 
-			// System.out.println("Found number of rows as:" + rows);
-
+			logger.debug("Found number of rows as:" + rows);
 
 			// start at row 1 not 0
 			for (int r = 1; r < rows; r++)
@@ -147,17 +178,25 @@ public class TestHelpers
 					}
 				}
 			}
-
 			workBook.close();
 			System.exit(1);
 		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-
 		return list;
 	}
 
+
+	/**
+	 * like getWebData but specific to the search test
+	 *
+	 * @param fileName
+	 *            The xls file name to process
+	 * @param columns
+	 *            How many columns are we using in this spreadsheet
+	 * @return a 2d array representing the data.
+	 */
 	public static Object[][] getSearchData(String searchFileName, String resortsFileName)
 	{
 
@@ -176,8 +215,6 @@ public class TestHelpers
 			rowArray[1] = combinationsArray[count - 1][0].toString();
 			rowArray[2] = combinationsArray[count - 1][1].toString();
 		}
-
 		return parametersArray;
 	}
-
 }

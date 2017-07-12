@@ -8,7 +8,6 @@ public class EmailProperties
 	private String emailAuthFileName;
 	private String body;
 	private String subject;
-	private String fileName;
 	private String filesToSend;
 
 	public EmailProperties(String recipients, String sender, String emailAuthFileName, String body, String subject,
