@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" packages="com.stg.bluckau.qa.ReporterAppender">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level: %msg%n"/>
+    </Console>
+    <File name="FileAppender" fileName="test-output\\full-output.log" append="false">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level: %msg%n"/>
+    </File>
+        <File name="EmailFileAppender" fileName="test-output\\email-log.log" append="false">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level: %msg%n"/>
+    </File>
+    <Reporter name="TestReporter">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level: %msg%n"/>
+    </Reporter>
+  </Appenders>
+  <Loggers>
+    <Root level="trace">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="FileAppender"/>
+      <AppenderRef ref="EmailFileAppender"/>
+      <AppenderRef ref="TestReporter"/>
+    </Root>
+  </Loggers>
+</Configuration>

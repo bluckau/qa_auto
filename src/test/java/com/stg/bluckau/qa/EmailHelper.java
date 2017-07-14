@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ISuite;
@@ -13,8 +14,8 @@ public class EmailHelper
 {
 	private Logger logger = LogManager.getLogger("testLogger");
 
-	private static final String EMAIL_REPORT_JENKINS = "test-output/target/surefire-reports/emailable-report.html";
-	private static final String EMAIL_REPORT_NONJENKINS = "test-output/emailable-report.html";
+	private static final String EMAIL_REPORT_JENKINS = "test-output\\target\\surefire-reports\\emailable-report.html";
+	private static final String EMAIL_REPORT_NONJENKINS = "test-output\\emailable-report.html";
 
 	public EmailHelper(ITestContext context)
 	{
@@ -34,9 +35,7 @@ public class EmailHelper
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Current dir:" + current);
-		String currentDir = System.getProperty("user.dir");
-		System.out.println("Current dir using System:" + currentDir);
+		logger.debug("Current dir:" + current);
 		logger.trace("running sendTestResults");
 		//The suite from the context
 		ISuite suite = context.getSuite();
@@ -53,20 +52,13 @@ public class EmailHelper
 			emailFilePath = EMAIL_REPORT_NONJENKINS;
 		}
 
-		String attachments = context.getAttribute("attachments").toString();
+
 		filesToSend = emailFilePath;
-		if (attachments == null || "".equals(attachments))
-		{
-			logger.debug("no attachments found for email");
-		}
-		else
-		{
-			filesToSend = filesToSend + "," + attachments;
-		}
+
+		if (TestLogUtil.screenshots.size() > 0)
+			filesToSend = filesToSend + "," + StringUtils.join(TestLogUtil.screenshots, (","));
 
 
-		// TODO: add the screen shots or get them to a universally accessible
-		// path
 		EmailProperties emailProperties = new EmailProperties(addresses, from, "src/test/resources/mail.properties",
 				bodyText, "Test results from testng", filesToSend);
 		EmailHandler emailHandler = new EmailHandler(emailProperties);

@@ -2,6 +2,7 @@ package com.stg.bluckau.qa;
 
 import static org.junit.Assert.assertEquals;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -33,8 +34,8 @@ public class TestChallengeOne
 	// have to specify columns to read
 
 	private ITestContext context;
-	private static TestLogUtil testLogUtil;
-	private static Logger logger;
+
+	private static Logger logger = LogManager.getLogger(TestLogUtil.LOGGER_NAME);
 
 	/**
 	 *
@@ -59,7 +60,9 @@ public class TestChallengeOne
 	public void setUpItestContext(ITestContext context)
 	{
 		this.context = context;
-		testLogUtil = new TestLogUtil(context);
+		TestLogUtil.initializeLoggers(context);
+		logger = LogManager.getLogger(TestLogUtil.LOGGER_NAME);
+
 	}
 
 	/**
@@ -77,8 +80,6 @@ public class TestChallengeOne
 		context.setAttribute("fileLogLevel", fileLogLevel);
 		context.setAttribute("emailLogLevel", emailLogLevel);
 		context.setAttribute("consoleLogLevel", consoleLogLevel);
-		testLogUtil = new TestLogUtil(context);
-		logger = testLogUtil.getLogger();// get the logger with the right log
 	}
 
 	/**

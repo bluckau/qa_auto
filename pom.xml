@@ -28,7 +28,10 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
-				</configuration>
+			        <annotationProcessors>
+          				<annotationProcessor>org.apache.logging.log4j.core.config.plugins.processor.PluginProcessor</annotationProcessor>
+        			</annotationProcessors>
+      			</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -102,7 +102,6 @@ public class TestChallengeThree
 		System.out.println("  subMenu " + subMenu);
 		// System.out.println("validationString " + validationString);
 
-		System.out.printf("gotoSubMenu(%s, %s);", menuOption, subMenu);
 		mainPage.goToSubMenu(menuOption, subMenu);
 		Automation.snooze(5);
 		System.out.println("/n               " + Automation.getPageTitle() + "\n");

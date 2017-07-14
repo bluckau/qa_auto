@@ -23,7 +23,7 @@ import org.apache.poi.ss.usermodel.DataFormatter;
  */
 public class TestHelpers
 {
-	private static Logger logger = LogManager.getLogger("testLogger");
+	static Logger logger = LogManager.getLogger(TestLogUtil.LOGGER_NAME);
 
 	/*
 	 * printArray prints the contents of an array. It is mainly for debugging
@@ -33,7 +33,7 @@ public class TestHelpers
 	 *
 	 * @param columns How many columns we are using in this array
 	 */
-	public static void printArray(Object[][] array, int columns)
+	public static void debugPrintArray(Object[][] array, int columns)
 	{
 		logger.trace("starting printArray");
 		int rows = array.length;
@@ -46,14 +46,13 @@ public class TestHelpers
 				Object temp = array[i][j];
 				if (temp != null)
 				{
-					System.out.println("Values at arr[" + i + "][" + j + "] " + temp.toString());
+					logger.debug("Values at arr[" + i + "][" + j + "] " + temp.toString());
 				}
 				else
 				{
-					System.out.println("Values at arr[" + i + "][" + j + "] is NULL");
+					logger.debug("Values at arr[" + i + "][" + j + "] is NULL");
 				}
 			}
-			System.out.println();
 		}
 	}
 
@@ -67,11 +66,11 @@ public class TestHelpers
 	 */
 	public static Object[][] getWebData(String fileName, int columns)
 	{
-		// System.err.println("****getWebData");
-		// System.err.println("file name: " + fileName);
+		logger.trace("*getWebData*");
+		logger.trace("file name: " + fileName);
 		if (new File(fileName).exists())
 		{
-			// System.out.println("file exists");
+			logger.debug("file exists");
 		} else
 		{
 			System.err.println("File " + fileName + "not exist");
@@ -90,14 +89,14 @@ public class TestHelpers
 			int rows = 0;
 			String cellData = "";
 			rows = sheet.getPhysicalNumberOfRows();
-			// System.out.println("Found number of rows as:" + rows);
-			// System.out.println("num of coumns is:");
+			logger.debug("Found number of rows as:" + rows);
+			logger.debug("num of coumns is:");
 			theArray = new String[rows - 1][columns];
 
 			// start at row 1 not 0
 			for (int r = 1; r < rows; r++)
 			{
-				// System.out.println("processing row " + r);
+				logger.trace("processing row " + r);
 				row = sheet.getRow(r);
 				if (row != null)
 				{
@@ -111,15 +110,14 @@ public class TestHelpers
 
 							if (!("".equals(cellData)))
 							{
-								// System.out.println("Adding to the array " +
-								// cellData.toString());
+								logger.trace("Adding to the array " + cellData.toString());
 								theArray[r - 1][c] = cellData;
 							}
 						}
 					}
 				}
 			}
-			// System.out.println("Close workbook");
+			logger.debug("Close workbook");
 			workBook.close();
 		} catch (IOException e)
 		{
@@ -128,7 +126,7 @@ public class TestHelpers
 
 		if (logger.isDebugEnabled())
 		{
-			printArray(theArray, columns);
+			debugPrintArray(theArray, columns);
 		}
 		return theArray;
 	}
@@ -152,7 +150,6 @@ public class TestHelpers
 			// HSSFCell cell;
 
 			// get the resorts
-
 			int rows = 0;
 			String cellData = "";
 			rows = sheet.getPhysicalNumberOfRows();
@@ -165,15 +162,15 @@ public class TestHelpers
 				row = sheet.getRow(r);
 
 				HSSFCell tmpc = row.getCell(0);
-				// System.out.println(tmpc);
+				logger.trace(tmpc);
 				if (tmpc != null)
 				{
 					DataFormatter formatter = new DataFormatter();
 					cellData = formatter.formatCellValue(tmpc);
-					// System.out.println("ADDING " + cellData);
+					logger.trace("ADDING " + cellData);
 					if (!("".equals(cellData)))
 					{
-						// System.out.println("ADDING " + cellData);
+						logger.trace("ADDING " + cellData);
 						list.add(cellData);
 					}
 				}

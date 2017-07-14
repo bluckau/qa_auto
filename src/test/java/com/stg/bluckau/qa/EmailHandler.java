@@ -22,7 +22,7 @@ public class EmailHandler
 	private String useAuth;
 	private EmailProperties emailProperties;
 
-	private Logger logger = LogManager.getLogger("testLogger");
+	private static Logger logger = LogManager.getLogger(TestLogUtil.LOGGER_NAME);
 	public EmailHandler(EmailProperties emailProperties)
 	{
 		this.emailProperties = emailProperties;
@@ -33,7 +33,7 @@ public class EmailHandler
 		Properties props = new Properties();
 		try
 		{
-			System.out.println("loading from file name: " + fileName);
+			logger.info("loading email auth from file name: " + fileName);
 			props.load(new FileInputStream(fileName));
 		} catch (IOException e)
 		{
@@ -53,7 +53,7 @@ public class EmailHandler
 
 		String recipients;
 		recipients = emailProperties.getRecipients();
-		System.out.println("Recipients = " + recipients);
+		logger.info("Recipients = " + recipients);
 		for (String recipient : emailProperties.getRecipients().split(","))
 		{
 			sendEmail(recipient, emailProperties);
@@ -69,7 +69,7 @@ public class EmailHandler
 		logger.info( "smtpServer = " + smtpServer);
 		logger.info( "useAuthentication = " + useAuth);
 
-		System.out.println("userName: " + userName);
+		logger.trace("userName: " + userName);
 		sessionProperties.setProperty("mail.smtp.host", smtpServer);
 		sessionProperties.put("mail.smtp.port", smtpPort);
 		sessionProperties.put("mail.smtp.auth", useAuth);
@@ -94,31 +94,36 @@ public class EmailHandler
 			BodyPart messageBodyPart = new MimeBodyPart();
 
 			Multipart multipart = new MimeMultipart();
-			multipart.addBodyPart(messageBodyPart);
-
 			messageBodyPart.setText(emailProperties.getBody());
 			multipart.addBodyPart(messageBodyPart);
 
-			messageBodyPart = new MimeBodyPart();
-
-			//Add files to send
+			// Add files to send
 			String filesToSend = emailProperties.getFilesToSend();
-			System.out.println("Files to send: " + filesToSend);
+
+			// TODO move this to the emailproperties
+			filesToSend = filesToSend + "," + "test-output\\email-log.log";
+
+			System.out.println("files to send: " + filesToSend);
+
+			// may not need the null check anymore if we are always including
+			// the email log
 			if (filesToSend != null && filesToSend.length() > 0)
 			{
-				for (String name : emailProperties.getFilesToSend().split(","))
+				for (String name : filesToSend.split(","))
 				{
+					BodyPart emailPart = new MimeBodyPart();
+					logger.trace("processing name: " + name);
 					DataSource source = new FileDataSource(name);
-					messageBodyPart.setDataHandler(new DataHandler(source));
-					messageBodyPart.setFileName(name);
-					multipart.addBodyPart(messageBodyPart);
+					emailPart.setDataHandler(new DataHandler(source));
+					emailPart.setFileName(name);
+					multipart.addBodyPart(emailPart);
 				}
 			}
 
 			message.setContent(multipart);
 
 			Transport.send(message);
-			System.out.println("message sent");
+			logger.info("message sent");
 		} catch (MessagingException e)
 		{
 			e.printStackTrace();

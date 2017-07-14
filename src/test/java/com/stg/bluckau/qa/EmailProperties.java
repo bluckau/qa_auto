@@ -1,5 +1,6 @@
 package com.stg.bluckau.qa;
 
+import org.testng.Reporter;
 
 public class EmailProperties
 {

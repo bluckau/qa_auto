@@ -44,8 +44,6 @@ public class WordScraper
 				prevNum = (wordMap.containsKey(elem)) ? wordMap.get(elem) : 0;
 				if (!"".equals(elem) && elem.matches("[a-zA-Z]+"))
 				{
-					// if (elem.startsWith("Valley"))
-					// System.out.println(" FOUND VALLEY");
 					wordMap.put(elem, ++prevNum);
 				}
 			}

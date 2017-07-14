@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <!-- verbose=<1 through 10>. This is the verbosity for testng in general. -->
-<suite verbose="1" name="Suite1">
+<suite verbose="10" name="Suite1">
 	<listeners>
 		<listener class-name="com.stg.bluckau.qa.RealTimeListener"></listener>
 	</listeners>
